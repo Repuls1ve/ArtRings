@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+@use "src/assets/scss/typography";
+@use "src/assets/scss/colors";
+
+* {
+  font-family: typography.$font-primary;
+  font-weight: typography.$regular;
+  color: colors.$color-primary;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 2.875rem;
+  font-family: typography.$font-secondary;
+  letter-spacing: 0.05em;
+}
+
+h2 {
+  font-size: 1.875rem;
+  font-family: typography.$font-secondary;
+}
+
+h3 {
+  font-size: 1.625rem;
+  font-family: typography.$font-secondary;
+  letter-spacing: 0.05em;
+}
+
+button,
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
