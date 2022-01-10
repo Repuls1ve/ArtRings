@@ -1,0 +1,27 @@
+$screen-mobile: 425px;
+$screen-tablet: 959px;
+$screen-laptop: 1279px;
+
+@mixin mobile {
+  @media only screen and (max-width: $screen-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media only screen and (max-width: $screen-tablet) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media only screen and (max-width: $screen-laptop) {
+    @content;
+  }
+}
+
+@mixin new($screen-max) {
+  @media only screen and (max-width: $screen-max) {
+    @content;
+  }
+}
