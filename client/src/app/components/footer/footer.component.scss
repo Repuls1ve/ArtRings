@@ -57,7 +57,6 @@
     .social {
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 0.75rem;
       margin-top: 0.35rem;
 
@@ -71,6 +70,10 @@
         @include breakpoints.mobile {
           width: 44px;
         }
+      }
+
+      @include breakpoints.laptop {
+        justify-content: center;
       }
     }
 
