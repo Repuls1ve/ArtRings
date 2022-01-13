@@ -1,0 +1,21 @@
+@use "src/assets/scss/breakpoints";
+
+:host {
+  gap: 0.75rem;
+  height: 30px;
+}
+
+.social-media {
+  display: flex;
+  align-items: center;
+  height: inherit;
+  gap: inherit;
+
+  a {
+    height: inherit;
+
+    .icon {
+      height: inherit;
+    }
+  }
+}
