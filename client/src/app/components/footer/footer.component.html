@@ -2,7 +2,7 @@
   <div class="column" *ngIf="media.isActive('gt-md')">
     <a>
       <img
-      src="/assets/img/logo.svg"
+      src="/assets/svg/logo.svg"
       class="logo"
       >
     </a>
@@ -82,52 +82,11 @@
         <a class="email" href="mailto:info@art-rings.ru">info@art-rings.ru</a>
       </li>
     </ul>
-    <ng-container *ngIf="media.isActive('gt-md')">
-      <ng-container *ngTemplateOutlet="social"></ng-container>
-    </ng-container>
+    <app-social-media *ngIf="media.isActive('gt-md')"></app-social-media>
   </div>
   <div class="column" *ngIf="media.isActive('lt-lg')">
-    <ng-container *ngTemplateOutlet="social"></ng-container>
+    <app-social-media></app-social-media>
     <a class="politics">Политика конфиденциальности</a>
     <small>ИНН 672208547149</small>
   </div>
-  <ng-template #social>
-    <div class="social">
-      <a>
-        <img
-        class="icon"
-        src="/assets/img/facebook.svg"
-        alt="facebook"
-        >
-      </a>
-      <a>
-        <img
-        class="icon"
-        src="/assets/img/vk.svg"
-        alt="vk"
-        >
-      </a>
-      <a>
-        <img
-        class="icon"
-        src="/assets/img/whatsapp.svg"
-        alt="whatsapp"
-        >
-      </a>
-      <a>
-        <img
-        class="icon"
-        src="/assets/img/instagram.svg"
-        alt="instagram"
-        >
-      </a>
-      <a>
-        <img
-        class="icon"
-        src="/assets/img/telegram.svg"
-        alt="telegram"
-        >
-      </a>
-    </div>
-  </ng-template>
 </footer>

@@ -2,11 +2,12 @@
 
 :host {
   gap: 0.75rem;
-  height: 30px;
+  height: 34px;
 }
 
 .social-media {
   display: flex;
+  justify-content: inherit;
   align-items: center;
   height: inherit;
   gap: inherit;

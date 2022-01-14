@@ -54,32 +54,21 @@
       }
     }
 
-    .social {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-top: 0.35rem;
-
-      .icon {
-        width: 40px;
-
-        @include breakpoints.laptop {
-          width: 60px;
-        }
-
-        @include breakpoints.mobile {
-          width: 44px;
-        }
-      }
-
-      @include breakpoints.laptop {
-        justify-content: center;
-      }
-    }
-
     small {
       color: rgba($color: colors.$color-primary, $alpha: 0.2);
       font-size: 0.875rem;
+    }
+
+    app-social-media {
+      margin-top: 0.3125rem;
+      height: 34px;
+
+      @include breakpoints.laptop {
+        margin-top: 0;
+        margin-bottom: 0.3125rem;
+        justify-content: center;
+        height: 40px;
+      }
     }
 
     @include breakpoints.laptop {
