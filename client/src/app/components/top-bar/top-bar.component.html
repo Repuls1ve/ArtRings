@@ -1,0 +1,24 @@
+<aside class="top-bar">
+  <ng-container *ngIf="media.isActive('gt-md')">
+    <div class="column">
+      <address class="address">Москва, Большой Кисловский переулок, 5-7c1</address>
+      <a class="mail" href="mailto:info@art-rings.ru">info@art-rings.ru</a>
+    </div>
+    <div class="column">
+      <p class="processing-time">пн-пт 11:00-20:00</p>
+      <p class="processing-time">сб, вс 11:00-17:00</p>
+    </div>
+    <div class="column">
+      <a class="phone">+7 (499) 940-87-77</a>
+      <a class="phone">+7 (977) 841-23-40</a>
+    </div>
+  </ng-container>
+  <app-social-media class="social-media-host"></app-social-media>
+  <div class="search" *ngIf="media.isActive('lt-lg')">
+    <img
+    src="/assets/svg/search.svg"
+    class="search-icon"
+    alt="search"
+    >
+  </div>
+</aside>

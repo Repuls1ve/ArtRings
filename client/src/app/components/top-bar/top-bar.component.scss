@@ -1,0 +1,67 @@
+@use "src/assets/scss/colors";
+@use "src/assets/scss/typography";
+@use "src/assets/scss/breakpoints";
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: inherit;
+  width: 100%;
+  padding: 0.5rem 8%;
+  background-color: rgba($color: colors.$color-tertiary, $alpha: 0.2);
+
+  .processing-time,
+  .address,
+  .phone,
+  .mail {
+    display: block;
+    font-family: typography.$font-primary;
+    font-weight: typography.$regular;
+    font-style: initial;
+    font-size: 0.875rem;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      width: 2.5rem;
+      height: 1.5rem;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  .search {
+    display: flex;
+
+    .search-icon {
+      height: 24px;
+    }
+  }
+
+  .social-media-host {
+    height: 40px;
+
+    @include breakpoints.mobile {
+      height: 36px;
+      gap: 0.25rem;
+    }
+  }
+
+  .processing-time:nth-child(1)::before {
+    background-image: url("/assets/svg/clock.svg");
+  }
+
+  .phone:nth-child(1)::before {
+    background-image: url("/assets/svg/phone.svg");
+  }
+
+  .address::before {
+    background-image: url("/assets/svg/map-pin.svg");
+  }
+
+  .mail::before {
+    background-image: url("/assets/svg/mail.svg");
+  }
+}
