@@ -1,0 +1,60 @@
+@use "src/assets/scss/typography";
+@use "src/assets/scss/breakpoints";
+
+.header {
+  display: flex;
+  flex-direction: column;
+
+  .top-bar-host {
+    min-height: 60px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem 8%;
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 40px;
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+
+        a {
+          font-size: 0.875rem;
+          font-weight: typography.$light;
+          color: rgba($color: black, $alpha: 0.5);
+        }
+      }
+
+      .search {
+        display: flex;
+        gap: 1.35rem;
+
+        .search-input {
+          padding: 0.3rem 0.1rem;
+          width: 235px;
+          border: none;
+          border-bottom: 0.06rem solid rgba($color: black, $alpha: 0.2);
+
+          &::placeholder {
+            color: rgba($color: black, $alpha: 0.5);
+            font-weight: typography.$light;
+            font-family: typography.$font-primary;
+            font-size: 0.875rem;
+          }
+        }
+
+        .search-icon {
+          filter: brightness(0) saturate(100%) invert(8%) sepia(41%)
+            saturate(5539%) hue-rotate(229deg) brightness(103%) contrast(113%);
+        }
+      }
+    }
+  }
+}
