@@ -7,7 +7,8 @@ import { FooterComponent } from './components/footer/footer.component'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { HeaderComponent } from './components/header/header.component'
 import { TopBarComponent } from './components/top-bar/top-bar.component'
-import { SocialMediaComponent } from './components/social-media/social-media.component'
+import { SocialMediaComponent } from './components/social-media/social-media.component';
+import { HomeComponent } from './views/home/home.component'
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { SocialMediaComponent } from './components/social-media/social-media.com
     FooterComponent,
     HeaderComponent,
     TopBarComponent,
-    SocialMediaComponent
+    SocialMediaComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
