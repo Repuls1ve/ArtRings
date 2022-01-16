@@ -56,5 +56,105 @@
         }
       }
     }
+
+    .brand {
+      width: 100%;
+      padding: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .name {
+        text-transform: uppercase;
+        font-weight: typography.$light;
+      }
+
+      .destination {
+        font-size: 1rem;
+        color: rgba($color: black, $alpha: 0.5);
+        text-transform: uppercase;
+      }
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      .logo {
+        width: 106px;
+      }
+
+      .navbar-toggler {
+        height: 21px;
+        background: none;
+        border: none;
+
+        .menu-icon {
+          height: 100%;
+        }
+      }
+
+      .nav-links-wrapper {
+        flex-basis: 100%;
+        margin: 0 8%;
+
+        .nav-links {
+          display: flex;
+          justify-content: space-between;
+
+          a {
+            text-transform: uppercase;
+          }
+        }
+
+        @include breakpoints.new(1450px) {
+          margin: 0 5%;
+        }
+
+        @include breakpoints.new(1350px) {
+          margin: 0 2.5%;
+        }
+      }
+
+      .extra-links {
+        display: flex;
+        gap: 1.5rem;
+
+        img {
+          height: 24px;
+        }
+      }
+
+      .brand {
+        gap: 0.2rem;
+
+        .name {
+          font-size: 2rem;
+        }
+
+        .destination {
+          font-size: 0.8rem;
+        }
+      }
+
+      @include breakpoints.new(500px) {
+        gap: 1.1rem;
+
+        .brand {
+          align-items: flex-start;
+
+          .name {
+            text-align: left;
+            font-size: 1.35rem;
+          }
+
+          .destination {
+            font-size: 0.6rem;
+          }
+        }
+      }
+    }
   }
 }

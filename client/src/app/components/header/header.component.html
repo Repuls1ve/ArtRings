@@ -1,24 +1,26 @@
 <header class="header">
   <app-top-bar class="top-bar-host"></app-top-bar>
   <div class="content">
-    <nav class="top-nav">
-      <ul class="nav-links">
-        <li>
-          <a>Студия</a>
-        </li>
-        <li>
-          <a>О нас</a>
-        </li>
-        <li>
-          <a>Доставка и оплата</a>
-        </li>
-        <li>
-          <a>Гарантии</a>
-        </li>
-        <li>
-          <a>Отзывы</a>
-        </li>
-      </ul>
+    <div class="top-nav" *ngIf="media.isActive('gt-md')">
+      <nav class="nav-links-wrapper">
+        <ul class="nav-links">
+          <li>
+            <a>Студия</a>
+          </li>
+          <li>
+            <a>О нас</a>
+          </li>
+          <li>
+            <a>Доставка и оплата</a>
+          </li>
+          <li>
+            <a>Гарантии</a>
+          </li>
+          <li>
+            <a>Отзывы</a>
+          </li>
+        </ul>
+      </nav>
       <div class="search">
         <input
         class="search-input"
@@ -30,6 +32,65 @@
         alt="search"
         >
       </div>
-    </nav>
+    </div>
+    <ng-container *ngIf="media.isActive('gt-md')">
+      <ng-container *ngTemplateOutlet="brand"></ng-container>
+    </ng-container>
+    <div class="main-nav">
+      <img
+      *ngIf="media.isActive('gt-md')"
+      class="logo"
+      src="/assets/img/logo-alt.png"
+      alt="logo"
+      >
+      <button class="navbar-toggler">
+        <img
+        class="menu-icon"
+        src="/assets/svg/burger.svg"
+        >
+      </button>
+      <nav class="nav-links-wrapper" *ngIf="media.isActive('gt-md'); else brand">
+        <ul class="nav-links">
+          <li>
+            <a>Обручальные кольца</a>
+          </li>
+          <li>
+            <a>Помолвочные кольца</a>
+          </li>
+          <li>
+            <a>Свадебные дуэты</a>
+          </li>
+          <li>
+            <a>На заказ</a>
+          </li>
+        </ul>
+      </nav>
+      <nav class="extra-links-wrapper">
+        <ul class="extra-links">
+          <li>
+            <a>
+              <img
+              src="/assets/svg/shopping-cart.svg"
+              alt="cart"
+              >
+            </a>
+          </li>
+          <li>
+            <a>
+              <img
+              src="/assets/svg/heart.svg"
+              alt="favourites"
+              >
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <ng-template #brand>
+      <div class="brand">
+        <h1 class="name">Art-Rings</h1>
+        <h2 class="destination">Moscow jewelry studio</h2>
+      </div>
+    </ng-template>
   </div>
 </header>
