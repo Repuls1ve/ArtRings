@@ -43,10 +43,11 @@
       src="/assets/img/logo-alt.png"
       alt="logo"
       >
-      <button class="navbar-toggler">
+      <button class="navbar-toggler" aria-label="menu-toggler" (click)="toggleNavbar()">
         <img
         class="menu-icon"
         src="/assets/svg/burger.svg"
+        alt="menu"
         >
       </button>
       <nav class="nav-links-wrapper" *ngIf="media.isActive('gt-md'); else brand">
@@ -85,6 +86,98 @@
           </li>
         </ul>
       </nav>
+    </div>
+    <div class="navbar-wrapper" *ngIf="!navbarClosed">
+      <div class="navbar-menu">
+        <button class="close-button" aria-label="menu-close" (click)="toggleNavbar()">
+          <img
+          class="close-icon"
+          src="/assets/svg/close.svg"
+          alt="close"
+          >
+        </button>
+        <img
+        class="logo"
+        src="/assets/img/logo-alt-large.png"
+        alt="logo"
+        >
+        <nav class="main-links-wrapper">
+          <ul class="main-links">
+            <li>
+              <a>Студия</a>
+            </li>
+            <li>
+              <a>О нас</a>
+            </li>
+            <li>
+              <a>Доставка и оплата</a>
+            </li>
+            <li>
+              <a>Гарантии</a>
+            </li>
+            <li>
+              <a>Контакты</a>
+            </li>
+          </ul>
+        </nav>
+        <hr class="hr">
+        <nav class="navbar-footer">
+          <ul class="footer-links">
+            <li>
+              <a>Все обручальные кольца</a>
+            </li>
+            <li>
+              <a>Необычные обручальные кольца</a>
+            </li>
+            <li>
+              <a>Классические обручальные кольца</a>
+            </li>
+            <li>
+              <a>Помолвочные кольца</a>
+            </li>
+            <li>
+              <a>Кольца с лебедями</a>
+            </li>
+            <li>
+              <a>Обручальные кольца парные</a>
+            </li>
+          </ul>
+          <ul class="footer-links">
+            <li>
+              <a>Студия</a>
+            </li>
+            <li>
+              <a>О нас</a>
+            </li>
+            <li>
+              <a>Контакты</a>
+            </li>
+            <li>
+              <a>Доставка и оплата</a>
+            </li>
+            <li>
+              <a>Гарантии</a>
+            </li>
+            <li>
+              <a>Отзывы</a>
+            </li>
+          </ul>
+          <ul class="footer-links">
+            <li>
+              <a>Бриллиант в подарок</a>
+            </li>
+            <li>
+              <a>Как выбрать обручальные кольца</a>
+            </li>
+            <li>
+              <a>О помолвочных кольцах</a>
+            </li>
+            <li class="social-media-wrapper">
+              <app-social-media></app-social-media>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
     <ng-template #brand>
       <div class="brand">

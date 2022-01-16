@@ -1,5 +1,6 @@
 @use "src/assets/scss/typography";
 @use "src/assets/scss/breakpoints";
+@use "src/assets/scss/colors";
 
 .header {
   display: flex;
@@ -154,6 +155,125 @@
             font-size: 0.6rem;
           }
         }
+      }
+    }
+
+    .navbar-wrapper {
+      background-color: colors.$color-fourtry;
+      padding: 3% 8%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+
+      .navbar-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .close-button {
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: none;
+          border: none;
+
+          .close-icon {
+            width: 30px;
+          }
+        }
+
+        .logo {
+          height: 130px;
+
+          @include breakpoints.tablet {
+            height: 75px;
+          }
+        }
+
+        .main-links {
+          margin: 2rem 0 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+
+          li {
+            display: flex;
+            justify-content: center;
+
+            a {
+              font-family: typography.$font-secondary;
+              font-size: 1.875rem;
+              text-transform: uppercase;
+              text-align: center;
+              color: rgba($color: black, $alpha: 0.7);
+            }
+          }
+
+          @include breakpoints.tablet {
+            margin-bottom: 0.5rem;
+            gap: 1.5rem;
+
+            li a {
+              font-size: 1.4rem;
+            }
+          }
+        }
+
+        .hr {
+          margin: 3rem 0;
+          width: 100%;
+          border: 1px solid rgba($color: colors.$color-tertiary, $alpha: 0.2);
+          border-radius: 1rem;
+        }
+
+        .navbar-footer {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          overflow: auto;
+
+          .footer-links {
+            display: flex;
+            flex-direction: column;
+
+            a {
+              line-height: 1.5rem;
+              font-size: 0.875rem;
+            }
+
+            .social-media-wrapper {
+              margin-top: auto;
+            }
+          }
+
+          @include breakpoints.tablet {
+            justify-content: space-between;
+
+            .footer-links:nth-last-child(1) {
+              margin-top: 1.5rem;
+
+              .social-media-wrapper {
+                margin-top: 1rem;
+              }
+            }
+          }
+
+          @include breakpoints.new(500px) {
+            .footer-links:nth-child(2) {
+              display: none;
+            }
+          }
+        }
+      }
+
+      @include breakpoints.tablet {
+        padding-top: 1.5rem;
       }
     }
   }

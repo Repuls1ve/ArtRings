@@ -7,5 +7,11 @@ import { MediaObserver } from '@angular/flex-layout'
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  public navbarClosed = true
+
   constructor(public readonly media: MediaObserver) {}
+
+  toggleNavbar(): void {
+    this.navbarClosed = !this.navbarClosed
+  }
 }
