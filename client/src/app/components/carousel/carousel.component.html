@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="images">
+    <ng-container *ngFor="let image of images">
+      <div class="image-wrapper" *ngIf="isActive(image)">
+        <img
+        class="image"
+        [srcset]="toSrcset(image.breakpoints)"
+        [src]="image.source"
+        [alt]="image.alt"
+        >
+      </div>
+    </ng-container>
+  </div>
+  <div class="dots">
+    <div
+    *ngFor="let i of [].constructor(images.length); index as dot"
+    (click)="setActive(dot)"
+    [class.active]="dot === active"
+    class="dot"
+    ></div>
+  </div>
+</div>
