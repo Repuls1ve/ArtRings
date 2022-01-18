@@ -12,11 +12,12 @@
     </ng-container>
   </div>
   <div class="dots">
-    <div
+    <button
     *ngFor="let i of [].constructor(images.length); index as dot"
     (click)="setActive(dot)"
     [class.active]="dot === active"
+    aria-label="menu-toggler"
     class="dot"
-    ></div>
+    ></button>
   </div>
 </div>

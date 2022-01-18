@@ -4,7 +4,6 @@ export interface ICarouselImage {
   source: string
   alt: string
   breakpoints?: string[]
-  sizes?: string[]
 }
 
 @Component({
@@ -26,7 +25,6 @@ export class CarouselComponent {
   }
 
   public toSrcset(breakpoints: ICarouselImage['breakpoints']): string | undefined {
-    console.log(breakpoints?.toString())
     return breakpoints?.toString()
   }
 }
