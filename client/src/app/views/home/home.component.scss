@@ -1,0 +1,108 @@
+@use "src/assets/scss/colors";
+@use "src/assets/scss/typography";
+@use "src/assets/scss/breakpoints";
+
+.carousel-section {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .heading {
+    font-size: 2rem;
+    padding: 0 8%;
+    text-transform: uppercase;
+    text-align: center;
+
+    @include breakpoints.tablet {
+      font-size: 1.8rem;
+    }
+
+    @include breakpoints.new(700px) {
+      font-size: 1.5rem;
+    }
+
+    @include breakpoints.new(550px) {
+      font-size: 1.2rem;
+    }
+
+    @include breakpoints.mobile {
+      font-size: 1rem;
+    }
+  }
+
+  .gift {
+    margin-top: 3.5rem;
+    width: 100%;
+    padding: 0 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .decoration {
+      width: 80%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .diamond {
+        width: 56px;
+        height: 56px;
+        margin: 0 5%;
+
+        @include breakpoints.laptop {
+          width: 44px;
+          height: 44px;
+        }
+
+        @include breakpoints.tablet {
+          width: 38px;
+          height: 38px;
+        }
+
+        @include breakpoints.new(700px) {
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      hr {
+        width: 100%;
+        height: 2px;
+        border-color: colors.$color-secondary;
+      }
+
+      @include breakpoints.mobile {
+        width: 100%;
+      }
+    }
+
+    .gift-title {
+      margin-top: 1.35rem;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      font-weight: typography.$medium;
+
+      @include breakpoints.new(700px) {
+        margin-top: 0.85rem;
+        font-size: 1rem;
+      }
+
+      @include breakpoints.mobile {
+        font-size: 0.9rem;
+      }
+    }
+
+    @include breakpoints.tablet {
+      margin-top: 2rem;
+    }
+
+    @include breakpoints.mobile {
+      margin-top: 1.5rem;
+    }
+  }
+
+  @include breakpoints.tablet {
+    margin-top: 0.5rem;
+  }
+}

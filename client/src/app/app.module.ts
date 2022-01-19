@@ -8,7 +8,8 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { HeaderComponent } from './components/header/header.component'
 import { TopBarComponent } from './components/top-bar/top-bar.component'
 import { SocialMediaComponent } from './components/social-media/social-media.component';
-import { HomeComponent } from './views/home/home.component'
+import { HomeComponent } from './views/home/home.component';
+import { CarouselComponent } from './components/carousel/carousel.component'
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HomeComponent } from './views/home/home.component'
     HeaderComponent,
     TopBarComponent,
     SocialMediaComponent,
-    HomeComponent
+    HomeComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
