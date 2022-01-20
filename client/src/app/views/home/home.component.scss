@@ -3,7 +3,7 @@
 @use "src/assets/scss/breakpoints";
 
 .carousel-section {
-  margin: 1.5rem 0;
+  padding: 1.5rem 0 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,5 +104,83 @@
 
   @include breakpoints.tablet {
     margin-top: 0.5rem;
+  }
+}
+
+.catalog-section {
+  padding: 3rem 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: colors.$color-secondary;
+
+  .title {
+    margin-bottom: 2.5rem;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    color: white;
+
+    @include breakpoints.tablet {
+      font-size: 2.15rem;
+    }
+
+    @include breakpoints.mobile {
+      font-size: 1.8rem;
+    }
+  }
+
+  .catalog {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+
+    &-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-basis: calc(50% - 1.25rem);
+      height: 385px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: white;
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 60px;
+        background: transparent;
+        margin: 5% 10%;
+        border: 1px solid colors.$color-secondary;
+        font-size: 0.875rem;
+        font-weight: typography.$semi-bold;
+        text-transform: uppercase;
+        color: colors.$color-secondary;
+      }
+
+      @include breakpoints.tablet {
+        flex-basis: 100%;
+        background-size: cover;
+      }
+    }
+
+    &-item:nth-child(1) {
+      background-image: url("/assets/img/category-1.png");
+    }
+
+    &-item:nth-child(2) {
+      background-image: url("/assets/img/category-2.png");
+    }
+
+    &-item:nth-child(3) {
+      background-image: url("/assets/img/category-3.png");
+    }
+
+    &-item:nth-child(4) {
+      background-image: url("/assets/img/category-4.png");
+    }
   }
 }
