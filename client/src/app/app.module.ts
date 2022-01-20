@@ -9,7 +9,7 @@ import { HeaderComponent } from './components/header/header.component'
 import { TopBarComponent } from './components/top-bar/top-bar.component'
 import { SocialMediaComponent } from './components/social-media/social-media.component';
 import { HomeComponent } from './views/home/home.component';
-import { CarouselComponent } from './components/carousel/carousel.component'
+import { SliderComponent } from './components/slider/slider.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { CarouselComponent } from './components/carousel/carousel.component'
     TopBarComponent,
     SocialMediaComponent,
     HomeComponent,
-    CarouselComponent
+    SliderComponent
   ],
   imports: [
     BrowserModule,

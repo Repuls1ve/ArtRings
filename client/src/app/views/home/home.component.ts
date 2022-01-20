@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { HomeCarouselImages } from 'src/app/constants/carousel.constant'
+import { HomeSliderImages } from 'src/app/constants/slider.constant'
 
 @Component({
   selector: 'app-home',
@@ -7,5 +7,5 @@ import { HomeCarouselImages } from 'src/app/constants/carousel.constant'
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  public readonly carousel = HomeCarouselImages
+  public readonly slider = HomeSliderImages
 }

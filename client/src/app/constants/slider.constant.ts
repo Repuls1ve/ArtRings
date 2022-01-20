@@ -1,6 +1,6 @@
-import { ICarouselImage } from '../components/carousel/carousel.component'
+import { ISliderImage } from '../components/slider/slider.component'
 
-export const HomeCarouselImages: ICarouselImage[] = [
+export const HomeSliderImages: ISliderImage[] = [
   {
     source: '/assets/img/rings-3840w.png',
     alt: 'rings',
