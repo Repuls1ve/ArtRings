@@ -1,0 +1,8 @@
+<div class="rating">
+  <img
+  *ngFor="let star of stars"
+  [src]="starSource(star)"
+  class="star-mark"
+  alt="rating-mark"
+  >
+</div>
