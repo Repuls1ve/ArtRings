@@ -1,0 +1,21 @@
+<div class="carousel-wrapper">
+  <div class="carousel">
+    <button class="carousel-toggler" [disabled]="isPreviousDisabled()" (click)="toPrevious()">
+      <img
+      class="arrow arrow-previous"
+      src="/assets/svg/arrow.svg"
+      alt="previous"
+      >
+    </button>
+    <div class="carousel-items">
+      <ng-content></ng-content>
+    </div>
+    <button class="carousel-toggler" [disabled]="items.last.visible" (click)="toNext()">
+      <img
+      class="arrow arrow-next"
+      src="/assets/svg/arrow.svg"
+      alt="next"
+      >
+    </button>
+  </div>
+</div>

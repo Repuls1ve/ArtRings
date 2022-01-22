@@ -1,0 +1,57 @@
+@use "src/assets/scss/colors";
+
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  .carousel {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+
+    .carousel-items {
+      display: flex;
+      overflow: auto;
+      padding-bottom: 2rem;
+      gap: 3rem;
+      width: 90%;
+
+      &::-webkit-scrollbar {
+        height: 3px;
+        background-color: rgba(colors.$color-tertiary, 0.2);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: colors.$color-primary;
+      }
+    }
+
+    .carousel-toggler {
+      background: transparent;
+      border: none;
+
+      .arrow-previous {
+        transform: rotate(180deg);
+      }
+
+      &:disabled {
+        cursor: default;
+
+        .arrow {
+          filter: brightness(0) saturate(100%) invert(54%) sepia(14%)
+            saturate(0%) hue-rotate(157deg) brightness(90%) contrast(90%);
+        }
+      }
+    }
+  }
+}
