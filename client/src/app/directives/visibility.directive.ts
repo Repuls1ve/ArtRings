@@ -6,15 +6,15 @@ import { BehaviorSubject, delay } from 'rxjs'
 })
 export class VisibilityDirective implements OnInit, AfterViewInit, OnDestroy {
   @Input()
-  private debounceTime = 0
+  public debounceTime = 0
 
   @Input()
-  private threshold = 0.9
+  public threshold = 0.9
 
   @Output()
   public readonly visible = new EventEmitter<boolean>()
 
-  private subject$ = new BehaviorSubject<IntersectionObserverEntry | null>(null)
+  private readonly subject$ = new BehaviorSubject<IntersectionObserverEntry | null>(null)
   private observer!: IntersectionObserver
 
   constructor(private readonly elementRef: ElementRef) {}
