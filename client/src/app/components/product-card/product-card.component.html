@@ -1,0 +1,32 @@
+<div class="product-card">
+  <div class="heading">
+    <div class="row">
+      <span class="identifier">Арт. {{ product.identifier }}</span>
+      <app-rating
+      class="rating"
+      [style.height.px]="ratingHeight"
+      [rating]="product.rating"
+      ></app-rating>
+    </div>
+  </div>
+  <div class="image-wrapper">
+    <img
+    *ngIf="product.images[0] as image"
+    [src]="image.source"
+    [alt]="image.alt"
+    >
+  </div>
+  <div class="row">
+    <img
+    src="/assets/svg/heart.svg"
+    [style.height.px]="favouriteHeight"
+    class="favourite-icon"
+    alt="favourite"
+    >
+    <span
+    [style.fontSize.px]="priceFontSize"
+    class="price">
+    {{ getPrice("RUB") }} &#8381;
+    </span>
+  </div>
+</div>

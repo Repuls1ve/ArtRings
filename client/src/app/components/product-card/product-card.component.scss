@@ -1,0 +1,51 @@
+@use "src/assets/scss/typography";
+
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+.product-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+
+  .row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .heading {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .identifier {
+      font-size: 0.875rem;
+      color: rgba($color: black, $alpha: 0.5);
+    }
+  }
+
+  .image-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 1rem 2rem 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .price {
+    font-weight: typography.$bold;
+  }
+}
