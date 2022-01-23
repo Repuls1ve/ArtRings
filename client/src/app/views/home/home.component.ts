@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { MediaObserver } from '@angular/flex-layout'
 import { HomeSliderImages } from 'src/app/constants/slider.constant'
 
 @Component({
@@ -8,4 +9,6 @@ import { HomeSliderImages } from 'src/app/constants/slider.constant'
 })
 export class HomeComponent {
   public readonly slider = HomeSliderImages
+
+  constructor(public readonly media: MediaObserver) {}
 }

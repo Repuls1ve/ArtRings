@@ -33,3 +33,26 @@
     </div>
   </div>
 </section>
+<section class="innovations-section">
+  <h2 class="title">Новинки</h2>
+  <div class="products-carousel" *ngIf="media.isActive('gt-xs'); else rows">
+    <app-carousel>
+      <app-carousel-item *ngFor="let i of [].constructor(15)" class="item-host">
+        <app-product-card ></app-product-card>
+      </app-carousel-item>
+    </app-carousel>
+  </div>
+  <ng-template #rows>
+    <div class="rows">
+      <div class="row" *ngFor="let i of [].constructor(6)">
+        <app-product-card
+        class="card-small"
+        [favourite.height.px]="16"
+        [rating.height.px]="16"
+        [price.fontSize.px]="14"
+        ></app-product-card>
+        <app-product-card class="card"></app-product-card>
+      </div>
+    </div>
+  </ng-template>
+</section>
