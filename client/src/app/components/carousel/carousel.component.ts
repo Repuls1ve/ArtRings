@@ -14,7 +14,7 @@ export class CarouselComponent {
     const visibles = this.visibleElements()
     const items = this.items.toArray()
     const lastVisibleIndex = items.indexOf(visibles[visibles.length - 1])
-    if (lastVisibleIndex !== items.length - 1) {
+    if (lastVisibleIndex !== items.length - 1 && visibles.length) {
       const target = items[lastVisibleIndex + 1]
       this.scrollIntoView(target.elementRef.nativeElement)
     }
@@ -24,7 +24,7 @@ export class CarouselComponent {
     const visibles = this.visibleElements()
     const items = this.items.toArray()
     const firstVisibleIndex = items.indexOf(visibles[0])
-    if (firstVisibleIndex !== 0) {
+    if (firstVisibleIndex !== 0 && visibles.length) {
       const target = items[firstVisibleIndex - 1]
       this.scrollIntoView(target.elementRef.nativeElement)
     }

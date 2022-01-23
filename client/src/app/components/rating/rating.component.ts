@@ -15,7 +15,6 @@ export class RatingComponent implements OnInit {
 
   ngOnInit(): void {
     this.fillStars()
-    console.log(this.stars)
   }
 
   public starSource(star: star): string {
