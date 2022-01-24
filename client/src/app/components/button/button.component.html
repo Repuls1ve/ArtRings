@@ -1,0 +1,8 @@
+<button
+[type]="buttonType"
+[class.button-secondary]="theme == 'secondary'"
+[class.button-primary]="theme == 'primary'"
+(click)="handleClick()"
+>
+  {{ text }}
+</button>
