@@ -1,0 +1,53 @@
+<section class="banner-section">
+  <h2 class="title">Создайте свое <br> уникальное украшение</h2>
+  <p class="description">Загрузите фото с любым украшением и мы с радостью изготовим его для вас</p>
+  <app-button class="calculate-button" text="Рассчитать стоимость"></app-button>
+</section>
+<section class="examples-section">
+  <h2 class="title">Примеры работ</h2>
+  <app-carousel *ngIf="media.isActive('gt-xs'); else sliderMobile">
+    <app-carousel-item class="example-item" *ngFor="let image of carousel">
+      <img
+      class="example-image"
+      [src]="image.source"
+      [alt]="image.alt"
+      >
+    </app-carousel-item>
+  </app-carousel>
+  <ng-template #sliderMobile>
+    <app-slider
+    [images]="slider"
+    ></app-slider>
+  </ng-template>
+</section>
+<section class="explanation-section">
+  <h2 class="title">Как мы это делаем</h2>
+  <div class="explanation-group">
+    <div class="explanation-item">
+      <h3 class="stage">1 этап</h3>
+      <h4 class="subtitle">Создание концепции</h4>
+      <p class="description">На этом этапе мы помогаем Вам определиться с концепцией будущего украшения, металлом, подбираем вставки, рассчитываем примерную стоимость готового изделия.</p>
+      <p class="deadline">1-3 дня</p>
+    </div>
+    <div class="explanation-item">
+      <h3 class="stage">2 этап</h3>
+      <h4 class="subtitle">Разработка дизайна</h4>
+      <p class="description">Исходя из информации, полученной от Вас ранее, дизайнеры готовят эскизы будущего изделия.</p>
+      <p class="deadline">5-15 дней</p>
+    </div>
+    <div class="explanation-item">
+      <h3 class="stage">3 этап</h3>
+      <h4 class="subtitle">Изготовление</h4>
+      <p class="description">Согласованный дизайн передается ювелирам, которые изготавливают будущее украшение. </p>
+      <p class="deadline">1-3 дня</p>
+    </div>
+    <div class="explanation-item">
+      <h3 class="stage">4 этап</h3>
+      <h4 class="subtitle">Доставка и оплата</h4>
+      <p class="description">Выполненный заказ передается клиенту. Заказ комплектуется всеми необходимыми сертификатами (при наличии), гарантией, подарочным футляром.</p>
+      <p class="deadline">1-3 дня</p>
+    </div>
+  </div>
+</section>
+<section class="application-section">
+</section>

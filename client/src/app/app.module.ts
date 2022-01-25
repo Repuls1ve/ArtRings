@@ -12,9 +12,11 @@ import { HomeComponent } from './views/home/home.component'
 import { SliderComponent } from './components/slider/slider.component'
 import { CarouselComponent } from './components/carousel/carousel.component'
 import { ProductCardComponent } from './components/product-card/product-card.component'
-import { RatingComponent } from './components/rating/rating.component';
-import { CarouselItemComponent } from './components/carousel-item/carousel-item.component';
+import { RatingComponent } from './components/rating/rating.component'
+import { CarouselItemComponent } from './components/carousel-item/carousel-item.component'
+import { CustomComponent } from './views/custom/custom.component'
 import { VisibilityDirective } from './directives/visibility.directive'
+import { ButtonComponent } from './components/button/button.component'
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { VisibilityDirective } from './directives/visibility.directive'
     ProductCardComponent,
     RatingComponent,
     CarouselItemComponent,
-    VisibilityDirective
+    VisibilityDirective,
+    ButtonComponent,
+    CustomComponent,
   ],
   imports: [
     BrowserModule,

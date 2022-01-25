@@ -26,3 +26,19 @@ export const HomeSliderImages: ISliderImage[] = [
     ]
   }
 ]
+
+export const CustomSliderImages: ISliderImage[] = [
+  {
+    source: '/assets/img/product-image-1.png',
+    alt: 'rings'
+  },
+  {
+    source: '/assets/img/product-image-2.png',
+    alt: 'rings'
+  },
+  {
+    source: '/assets/img/product-image-3.png',
+    alt: 'rings'
+  }
+]
+

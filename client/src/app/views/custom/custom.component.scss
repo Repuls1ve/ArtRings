@@ -1,0 +1,144 @@
+@use "src/assets/scss/colors";
+@use "src/assets/scss/typography";
+@use "src/assets/scss/breakpoints";
+
+section {
+  width: 100%;
+
+  .title {
+    text-transform: uppercase;
+    font-size: 2.8125rem;
+    text-align: center;
+  }
+}
+
+.banner-section {
+  margin-top: 1rem;
+  padding: 8% 8% 12%;
+  background-image: url("/assets/img/custom-banner.png");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .title {
+    text-align: left;
+  }
+
+  .description {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: typography.$semi-bold;
+  }
+
+  .calculate-button {
+    margin-top: 1.5rem;
+    width: 410px;
+    height: 60px;
+  }
+
+  @include breakpoints.tablet {
+    margin-top: 0;
+
+    .title {
+      font-size: 2.5rem;
+    }
+  }
+
+  @include breakpoints.new(600px) {
+    .title {
+      font-size: 2.2rem;
+    }
+  }
+
+  @include breakpoints.new(500px) {
+    .title {
+      font-size: 1.8rem;
+    }
+
+    .calculate-button {
+      width: 100%;
+    }
+  }
+}
+
+.examples-section {
+  padding: 4rem 8% 5rem;
+
+  .title {
+    margin-bottom: 1.5rem;
+  }
+
+  .example-item {
+    width: 420px;
+    height: 420px;
+  }
+
+  .example-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.explanation-section {
+  padding: 4rem 8% 5rem;
+  background-color: colors.$color-secondary;
+
+  .title {
+    margin-bottom: 2.5rem;
+    color: white;
+  }
+
+  .explanation-group {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+
+    .explanation-item {
+      padding: 2.5% 3.5%;
+      display: flex;
+      flex-direction: column;
+      flex-basis: calc(50% - 1.25rem);
+      min-height: 350px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: white;
+
+      .stage {
+        color: rgba($color: black, $alpha: 0.5);
+        font-family: typography.$font-secondary;
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .subtitle {
+        font-size: 1.625rem;
+        font-weight: typography.$semi-bold;
+        text-transform: uppercase;
+        color: colors.$color-secondary;
+        margin-bottom: 0.5rem;
+      }
+
+      .description {
+        font-size: 0.875rem;
+        line-height: 1.375rem;
+        font-weight: typography.$medium;
+      }
+
+      .deadline {
+        margin-top: auto;
+        font-size: 1rem;
+        color: rgba($color: black, $alpha: 0.5);
+      }
+
+      @include breakpoints.new(850px) {
+        padding: 2rem 1.5rem;
+        min-height: 300px;
+        flex-basis: 100%;
+      }
+    }
+  }
+}
