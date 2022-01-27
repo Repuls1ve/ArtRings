@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="heading">
+    <h2 class="title">Корзина</h2>
+    <button class="clear">Удалить все</button>
+  </div>
+  <div class="content">
+    <div class="cart-items">
+      <table *ngIf="media.isActive('gt-xs'); else itemsMobile">
+        <tr>
+          <th></th>
+          <th>Название</th>
+          <th>Кол-во</th>
+          <th>Цена</th>
+        </tr>
+        <tr class="cart-item" *ngFor="let item of cart.items">
+          <td>
+            <img
+            [src]="item.images[0].source"
+            [alt]="item.images[0].alt"
+            >
+          </td>
+          <td>Арт. {{ item.identifier }}</td>
+          <td>
+            <app-quantity-toggler
+            [value]="item.quantity"
+            ></app-quantity-toggler>
+          </td>
+          <td>{{ item.total['RUB'] }} &#8381;</td>
+        </tr>
+      </table>
+      <ng-template #itemsMobile>
+        <div class="cart-item-mobile" *ngFor="let item of cart.items">
+          <div class="image">
+            <img
+            [src]="item.images[0].source"
+            [alt]="item.images[0].alt"
+            >
+          </div>
+          <div class="descriptions">
+            <span class="price">{{ item.total['RUB'] }} &#8381;</span>
+            <span class="identifier">Арт. {{ item.identifier }}</span>
+            <app-quantity-toggler
+            [value]="item.quantity"
+            ></app-quantity-toggler>
+          </div>
+          <button class="remove">
+            <img
+            class="icon"
+            src="/assets/svg/close.svg"
+            alt="remove"
+            >
+          </button>
+        </div>
+      </ng-template>
+    </div>
+    <div class="summary">
+      <div class="summary-text">
+        <span class="total">Итого:</span>
+        <span class="price">{{cart.summary['RUB']}} &#8381;</span>
+      </div>
+      <app-button
+      text="Оформить заказ"
+      class="order-button"
+      ></app-button>
+    </div>
+  </div>
+</div>

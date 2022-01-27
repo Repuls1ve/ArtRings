@@ -17,6 +17,8 @@ import { CarouselItemComponent } from './components/carousel-item/carousel-item.
 import { CustomComponent } from './views/custom/custom.component'
 import { VisibilityDirective } from './directives/visibility.directive'
 import { ButtonComponent } from './components/button/button.component'
+import { CartComponent } from './views/cart/cart.component';
+import { QuantityTogglerComponent } from './components/quantity-toggler/quantity-toggler.component'
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ButtonComponent } from './components/button/button.component'
     VisibilityDirective,
     ButtonComponent,
     CustomComponent,
+    CartComponent,
+    QuantityTogglerComponent,
   ],
   imports: [
     BrowserModule,
