@@ -1,0 +1,43 @@
+@use "src/assets/scss/breakpoints";
+@use "src/assets/scss/typography";
+
+.container {
+  padding: 3.5rem 8% 5rem;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 35%;
+
+    .not-found {
+      width: 129px;
+    }
+
+    .text {
+      margin-top: 0.75rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .back {
+      height: 60px;
+    }
+
+    @include breakpoints.new(1450px) {
+      padding: 0 25%;
+    }
+
+    @include breakpoints.new(1100px) {
+      padding: 0 18%;
+    }
+
+    @include breakpoints.new(850px) {
+      padding: 0 10%;
+    }
+
+    @include breakpoints.new(600px) {
+      padding: 0;
+    }
+  }
+}

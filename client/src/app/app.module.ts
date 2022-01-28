@@ -18,7 +18,8 @@ import { CustomComponent } from './views/custom/custom.component'
 import { VisibilityDirective } from './directives/visibility.directive'
 import { ButtonComponent } from './components/button/button.component'
 import { CartComponent } from './views/cart/cart.component';
-import { QuantityTogglerComponent } from './components/quantity-toggler/quantity-toggler.component'
+import { QuantityTogglerComponent } from './components/quantity-toggler/quantity-toggler.component';
+import { NotFoundComponent } from './views/not-found/not-found.component'
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { QuantityTogglerComponent } from './components/quantity-toggler/quantity
     CustomComponent,
     CartComponent,
     QuantityTogglerComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
