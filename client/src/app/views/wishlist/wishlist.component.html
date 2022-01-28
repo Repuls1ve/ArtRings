@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="heading">
+    <h2 class="title">Избранное</h2>
+    <button class="clear">Удалить все</button>
+  </div>
+  <div class="content">
+    <div class="wished-items-container">
+      <div class="wished-items">
+        <div class="wished-item" *ngFor="let i of [].constructor(4)">
+          <app-product-card></app-product-card>
+        </div>
+      </div>
+      <div class="sale-banner" *ngIf="media.isActive('gt-sm')">
+        <img
+        src="/assets/img/sale-banner.png"
+        class="banner-image"
+        alt="sale-banner"
+        >
+      </div>
+    </div>
+  </div>
+</div>

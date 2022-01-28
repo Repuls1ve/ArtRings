@@ -1,0 +1,72 @@
+@use "src/assets/scss/typography";
+@use "src/assets/scss/breakpoints";
+@use "src/assets/scss/colors";
+
+.container {
+  padding: 1rem 8% 8rem;
+  display: flex;
+  flex-direction: column;
+
+  .heading {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+
+    .title {
+      font-size: 1.625rem;
+      font-weight: typography.$semi-bold;
+      text-transform: uppercase;
+    }
+
+    .clear {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      color: rgba($color: colors.$color-secondary, $alpha: 0.5);
+      font-size: 0.875rem;
+      font-weight: typography.$semi-bold;
+      text-transform: uppercase;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+
+    .wished-items-container {
+      display: flex;
+      justify-content: space-between;
+
+      .wished-items {
+        width: 65%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+
+        .wished-item {
+          width: calc(50% - 1rem);
+
+          @include breakpoints.new(500px) {
+            width: 100%;
+          }
+        }
+
+        @include breakpoints.tablet {
+          width: 100%;
+        }
+      }
+
+      .sale-banner {
+        cursor: pointer;
+        width: 25%;
+        max-width: 294px;
+
+        .banner-image {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

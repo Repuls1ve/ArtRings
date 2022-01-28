@@ -19,7 +19,8 @@ import { VisibilityDirective } from './directives/visibility.directive'
 import { ButtonComponent } from './components/button/button.component'
 import { CartComponent } from './views/cart/cart.component';
 import { QuantityTogglerComponent } from './components/quantity-toggler/quantity-toggler.component';
-import { NotFoundComponent } from './views/not-found/not-found.component'
+import { NotFoundComponent } from './views/not-found/not-found.component';
+import { WishlistComponent } from './views/wishlist/wishlist.component'
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { NotFoundComponent } from './views/not-found/not-found.component'
     CartComponent,
     QuantityTogglerComponent,
     NotFoundComponent,
+    WishlistComponent,
   ],
   imports: [
     BrowserModule,
