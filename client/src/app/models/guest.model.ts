@@ -1,11 +1,33 @@
-import { ICart } from '../interfaces/cart.interface'
-import { IViewed } from '../interfaces/viewed.interface'
-import { IWishlist } from '../interfaces/wishlist.interface'
+import { IProduct } from './product.model'
 
 export interface IGuest {
-  uid: string
+  metrics: IMetrics
   wishlist: IWishlist
   viewed: IViewed
   cart: ICart
+}
+
+export interface ICart {
+  items: ICartItem[]
+  summary: IProduct['prices']
+}
+
+export interface ICartItem extends IProduct {
+  quantity: number
+  total: IProduct['prices']
+}
+
+export interface IMetrics {
+  cart: number
+  wishlist: number
+  viewed: number
   activity: number
+}
+
+export interface IWishlist {
+  items: IProduct[]
+}
+
+export interface IViewed {
+  items: IProduct[]
 }
