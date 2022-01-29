@@ -1,6 +1,7 @@
 import { ISliderImage } from '../components/slider/slider.component'
 
 export interface IProduct {
+  _id: string
   identifier: string
   description: string
   prices: IProductPrices

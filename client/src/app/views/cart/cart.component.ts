@@ -3,6 +3,7 @@ import { MediaObserver } from '@angular/flex-layout'
 import { ICart, ICartItem } from 'src/app/interfaces/cart.interface'
 
 const mockCartItem: ICartItem = {
+  _id: '',
   reviews: [],
   discount: null,
   rating: 4,

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core'
 import { IProduct } from 'src/app/models/product.model'
 
 const mockProduct: IProduct = {
+  _id: '',
   reviews: [],
   discount: null,
   rating: 4,
