@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './routing/app-routing.module'
 import { AppComponent } from './app.component'
@@ -22,6 +23,7 @@ import { QuantityTogglerComponent } from './components/quantity-toggler/quantity
 import { NotFoundComponent } from './views/not-found/not-found.component'
 import { WishlistComponent } from './views/wishlist/wishlist.component'
 import { AppStoreModule } from './store/app-store.module'
+import { LoggingInterceptorProvider } from './interceptors/logging.interceptor'
 
 @NgModule({
   declarations: [
@@ -47,10 +49,13 @@ import { AppStoreModule } from './store/app-store.module'
   imports: [
     BrowserModule,
     FlexLayoutModule,
+    HttpClientModule,
     AppRoutingModule,
     AppStoreModule
   ],
-  providers: [],
+  providers: [
+    LoggingInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
