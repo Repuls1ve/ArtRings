@@ -1,3 +1,6 @@
-export enum Features {}
+import { Features } from './app.reducers'
+import { GuestState } from './guest/guest.reducer'
 
-export interface AppState {}
+export interface AppState {
+  [Features.Guest]: GuestState
+}

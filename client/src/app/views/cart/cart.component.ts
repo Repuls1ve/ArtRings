@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { MediaObserver } from '@angular/flex-layout'
-import { ICart, ICartItem } from 'src/app/interfaces/cart.interface'
+import { ICart, ICartItem } from 'src/app/models/guest.model'
 
 const mockCartItem: ICartItem = {
   _id: '',

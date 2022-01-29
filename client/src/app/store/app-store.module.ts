@@ -4,21 +4,19 @@ import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { environment } from 'src/environments/environment'
 import { EffectsModule } from '@ngrx/effects'
+import { AppEffects } from './app.effects'
+import { AppReducers } from './app.reducers'
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot({
-
-    }),
+    StoreModule.forRoot(AppReducers),
+    EffectsModule.forRoot(AppEffects),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
-    }),
-    EffectsModule.forRoot([
-
-    ])
+    })
   ],
   exports: [
     StoreModule,
