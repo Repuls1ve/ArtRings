@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store'
 import { IGuest } from 'src/app/models/guest.model'
-import { IError } from '../app.reducers'
 
 export const identifyGuest = createAction(
   '[Guest] Identify Guest'
@@ -13,5 +12,5 @@ export const identifyGuestSuccess = createAction(
 
 export const identifyGuestFailure = createAction(
   '[Guest] Identify Guest Failure',
-  props<IError>()
+  props<{error: string}>()
 )

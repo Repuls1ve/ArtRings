@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { catchError, map, of, switchMap } from 'rxjs'
+import { catchError, delay, last, map, of, retryWhen, switchMap, take, tap } from 'rxjs'
 import { GuestService } from 'src/app/services/guest.service'
 import { identifyGuest, identifyGuestFailure, identifyGuestSuccess } from './guest.actions'
 
@@ -15,7 +15,12 @@ export class GuestEffects {
     ofType(identifyGuest),
     switchMap(() => this.guestService.identifyGuest().pipe(
       map(payload => identifyGuestSuccess({data: payload})),
-      catchError(error => of(identifyGuestFailure(error)))
+      retryWhen(error => error.pipe(
+        delay(1000),
+        take(3)
+      )),
+      last(),
+      catchError(error => of(identifyGuestFailure({error: error.message})))
     ))
   ))
 }
