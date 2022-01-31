@@ -18,12 +18,13 @@ import { CarouselItemComponent } from './components/carousel-item/carousel-item.
 import { CustomComponent } from './views/custom/custom.component'
 import { VisibilityDirective } from './directives/visibility.directive'
 import { ButtonComponent } from './components/button/button.component'
-import { CartComponent } from './views/cart/cart.component';
+import { CartComponent } from './views/cart/cart.component'
 import { QuantityTogglerComponent } from './components/quantity-toggler/quantity-toggler.component'
 import { NotFoundComponent } from './views/not-found/not-found.component'
 import { WishlistComponent } from './views/wishlist/wishlist.component'
 import { AppStoreModule } from './store/app-store.module'
 import { LoggingInterceptorProvider } from './interceptors/logging.interceptor'
+import { PaginationComponent } from './components/pagination/pagination.component'
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { LoggingInterceptorProvider } from './interceptors/logging.interceptor'
     QuantityTogglerComponent,
     NotFoundComponent,
     WishlistComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

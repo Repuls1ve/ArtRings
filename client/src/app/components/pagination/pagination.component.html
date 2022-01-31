@@ -1,0 +1,16 @@
+<div class="pagination">
+  <a *ngIf="!isFirstPage" class="pagination-prev" (click)="selectPreviousPage()">{{ controlsName && 'Предыдущая'}}</a>
+  <span *ngIf="isFirstPage" class="pagination-prev disabled">{{ controlsName && 'Предыдущая'}}</span>
+  <ul class="pagination-pages">
+    <li *ngFor="let page of pagesRange" class="pagination-page">
+      <a
+      *ngIf="isNumericPage(page)"
+      [class.active]="isCurrentPage(page)"
+      (click)="!isCurrentPage(page) && selectPage(page)"
+      >{{ page }}</a>
+      <span *ngIf="!isNumericPage(page)">{{ page }}</span>
+    </li>
+  </ul>
+  <a *ngIf="!isLastPage" (click)="selectNextPage()" class="pagination-next">{{ controlsName && 'Следующая'}}</a>
+  <span *ngIf="isLastPage" class="pagination-next disabled">{{ controlsName && 'Следующая'}}</span>
+</div>
