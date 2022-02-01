@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { ModelDefinition, Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
 import { IGuest } from '../interfaces/guest.interface'
 
@@ -32,3 +32,8 @@ export class Guest implements IGuest {
 }
 
 export const GuestSchema = SchemaFactory.createForClass(Guest)
+
+export const GuestModelDefinition: ModelDefinition = {
+  name: Guest.name,
+  schema: GuestSchema
+}

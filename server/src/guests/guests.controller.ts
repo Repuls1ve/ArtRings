@@ -1,22 +1,25 @@
-import { Body, Controller, Get, Patch, Req, Res } from '@nestjs/common'
-import { CookieOptions, Request, Response } from 'express'
+import { Controller, Get, Param, Patch, Res, UseGuards } from '@nestjs/common'
+import { CookieOptions, Response } from 'express'
 import { map, Observable, switchMap, tap } from 'rxjs'
+import { Cookies } from 'src/common/decorators/cookies.decorator'
+import { GuestGuard } from 'src/common/guards/guest.guard'
 import { IResponse } from 'src/common/interceptors/transform.interceptor'
-import { UpdateCartDto } from './dtos/update-cart.dto'
-import { UpdateViewedDto } from './dtos/update-viewed.dto'
-import { UpdateWishlistDto } from './dtos/update-wishlist.dto'
+import { UpdateGuestDto } from './dtos/update-guest.dto'
 import { GuestsService } from './guests.service'
 import { GuestCookiesKeys } from './interfaces/cookies.interface'
 import { IGuest } from './interfaces/guest.interface'
+import { GuestDocument } from './schemas/guest.schema'
 
 @Controller('guests')
 export class GuestsController {
   constructor(private readonly guests: GuestsService) {}
 
   @Get('identify')
-  public identifyGuest(@Req() request: Request, @Res({passthrough: true}) response: Response): Observable<IResponse<IGuest['metrics']>> {
+  public identifyGuest(
+    @Cookies(GuestCookiesKeys.UID) uid: GuestDocument['id'],
+    @Res({passthrough: true}) response: Response
+  ): Observable<IResponse<IGuest['metrics']>> {
     const cookieOptions: CookieOptions = { httpOnly: true, secure: true }
-    const uid = request.cookies[GuestCookiesKeys.UID]
     
     return this.guests.isGuestExists(uid).pipe(
       switchMap(isExists => {
@@ -33,38 +36,88 @@ export class GuestsController {
   }
 
   @Get('cart')
-  public getGuestCart(@Req() request: Request): Observable<IResponse<IGuest['cart']>> {
-    const uid = request.cookies[GuestCookiesKeys.UID]
-    
-    return this.guests.getGuestCart(uid).pipe(
-      map(data => ({data}))
-    )
+  @UseGuards(GuestGuard)
+  public getGuestCart(
+    @Cookies(GuestCookiesKeys.UID) uid: GuestDocument['id']
+  ): Observable<IResponse<Pick<IGuest, 'cart' | 'metrics'>>> {
+    return this.guests.getGuestCart(uid).pipe(map(data => ({data})))
   }
 
-  @Patch('cart/update')
-  public updateGuestCart(@Req() request: Request, @Body() updateCartDto: UpdateCartDto): Observable<IResponse<Pick<IGuest, 'cart' | 'metrics'>>> {
-    const uid = request.cookies[GuestCookiesKeys.UID]
-
-    return this.guests.updateGuestCart(updateCartDto, uid).pipe(
-      map(data => ({data}))
-    )
+  @Patch('cart/add/:productId')
+  @UseGuards(GuestGuard)
+  public guestCartAdd(
+    @Cookies(GuestCookiesKeys.UID) uid: GuestDocument['id'],
+    @Param() updateGuestDto: UpdateGuestDto
+  ): Observable<IResponse<Pick<IGuest, 'cart' | 'metrics'>>> {
+    return this.guests.guestCartAdd(uid, updateGuestDto).pipe(map(data => ({data})))
   }
 
-  @Patch('wishlist/update')
-  public updateGuestWishlist(@Req() request: Request, @Body() updateWishlistDto: UpdateWishlistDto): Observable<IResponse<Pick<IGuest, 'wishlist' | 'metrics'>>> {
-    const uid = request.cookies[GuestCookiesKeys.UID]
-
-    return this.guests.updateGuestWishlist(updateWishlistDto, uid).pipe(
-      map(data => ({data}))
-    )
+  @Patch('cart/remove/:productId')
+  @UseGuards(GuestGuard)
+  public guestCartRemove(
+    @Cookies(GuestCookiesKeys.UID) uid: GuestDocument['id'],
+    @Param() updateGuestDto: UpdateGuestDto
+  ): Observable<IResponse<Pick<IGuest, 'cart' | 'metrics'>>> {
+    return this.guests.guestCartRemove(uid, updateGuestDto).pipe(map(data => ({data})))
   }
 
-  @Patch('viewed/update')
-  public updateGuestViewed(@Req() request: Request, @Body() updateViewedDto: UpdateViewedDto): Observable<IResponse<Pick<IGuest, 'viewed' | 'metrics'>>> {
-    const uid = request.cookies[GuestCookiesKeys.UID]
+  @Patch('cart/clear')
+  @UseGuards(GuestGuard)
+  public guestCartClear(
+    @Cookies(GuestCookiesKeys.UID) uid: GuestDocument['id']
+  ): Observable<IResponse<Pick<IGuest, 'cart' | 'metrics'>>> {
+    return this.guests.guestCartClear(uid).pipe(map(data => ({data})))
+  }
 
-    return this.guests.updateGuestViewed(updateViewedDto, uid).pipe(
-      map(data => ({data}))
-    )
+  @Patch('wishlist/add/:productId')
+  @UseGuards(GuestGuard)
+  public guestWishlistAdd(
+    @Cookies(GuestCookiesKeys.UID) uid: GuestDocument['id'],
+    @Param() updateGuestDto: UpdateGuestDto
+  ): Observable<IResponse<Pick<IGuest, 'wishlist' | 'metrics'>>> {
+    return this.guests.guestWishlistAdd(uid, updateGuestDto).pipe(map(data => ({data})))
+  }
+
+  @Patch('wishlist/remove/:productId')
+  @UseGuards(GuestGuard)
+  public guestWishlistRemove(
+    @Cookies(GuestCookiesKeys.UID) uid: GuestDocument['id'],
+    @Param() updateGuestDto: UpdateGuestDto
+  ): Observable<IResponse<Pick<IGuest, 'wishlist' | 'metrics'>>> {
+    return this.guests.guestWishlistRemove(uid, updateGuestDto).pipe(map(data => ({data})))
+  }
+
+  @Patch('wishlist/clear')
+  @UseGuards(GuestGuard)
+  public guestWishlistClear(
+    @Cookies(GuestCookiesKeys.UID) uid: GuestDocument['id']
+  ): Observable<IResponse<Pick<IGuest, 'wishlist' | 'metrics'>>> {
+    return this.guests.guestWishlistClear(uid).pipe(map(data => ({data})))
+  }
+
+  @Patch('viewed/add/:productId')
+  @UseGuards(GuestGuard)
+  public guestViewedAdd(
+    @Cookies(GuestCookiesKeys.UID) uid: GuestDocument['id'],
+    @Param() updateGuestDto: UpdateGuestDto
+  ): Observable<IResponse<Pick<IGuest, 'viewed' | 'metrics'>>> {
+    return this.guests.guestViewedAdd(uid, updateGuestDto).pipe(map(data => ({data})))
+  }
+
+  @Patch('viewed/remove/:productId')
+  @UseGuards(GuestGuard)
+  public guestViewedRemove(
+    @Cookies(GuestCookiesKeys.UID) uid: GuestDocument['id'],
+    @Param() updateGuestDto: UpdateGuestDto
+  ): Observable<IResponse<Pick<IGuest, 'viewed' | 'metrics'>>> {
+    return this.guests.guestViewedRemove(uid, updateGuestDto).pipe(map(data => ({data})))
+  }
+
+  @Patch('viewed/clear')
+  @UseGuards(GuestGuard)
+  public guestViewedClear(
+    @Cookies(GuestCookiesKeys.UID) uid: GuestDocument['id']
+  ): Observable<IResponse<Pick<IGuest, 'viewed' | 'metrics'>>> {
+    return this.guests.guestViewedClear(uid).pipe(map(data => ({data})))
   }
 }

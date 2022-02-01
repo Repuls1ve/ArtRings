@@ -1,107 +1,196 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { isValidObjectId, Model, QueryOptions, UpdateQuery } from 'mongoose'
-import { catchError, from, map, Observable, of, switchMap, tap } from 'rxjs'
-import { UpdateCartDto } from './dtos/update-cart.dto'
-import { UpdateViewedDto } from './dtos/update-viewed.dto'
-import { UpdateWishlistDto } from './dtos/update-wishlist.dto'
+import { Types, Model, QueryOptions, UpdateQuery } from 'mongoose'
+import { catchError, from, map, Observable, of, switchMap } from 'rxjs'
+import { ProductsService } from 'src/products/products.service'
+import { UpdateGuestDto } from './dtos/update-guest.dto'
 import { IGuest } from './interfaces/guest.interface'
 import { Guest, GuestDocument } from './schemas/guest.schema'
 
 @Injectable()
 export class GuestsService {
-  constructor(@InjectModel(Guest.name) private readonly guest: Model<GuestDocument>) {}
+  constructor(
+    @InjectModel(Guest.name) private readonly guest: Model<GuestDocument>,
+    private readonly products: ProductsService
+  ) {}
 
   public identifyExistingGuest(id: GuestDocument['id']): Observable<IGuest['metrics']> {
     return from(this.guest.findById(id)).pipe(
-      switchMap(guest => this.updateMetrics(guest.id).pipe(
-        map(guest => guest.metrics)
-      ))
+      map(guest => this.getMetrics(guest))
     )
   }
 
   public identifyNewGuest(): Observable<Pick<GuestDocument, 'metrics' | 'id'>> {
     return this.createGuest().pipe(
       map(guest => ({
-        metrics: guest.metrics,
+        metrics: this.getMetrics(guest),
         id: guest.id
       }))
     )
   }
 
-  public getGuestCart(id: GuestDocument['id']): Observable<IGuest['cart']> {
-    if (!isValidObjectId(id) || !id) throw new BadRequestException('Provided invalid uid')
-
+  public getGuestCart(id: GuestDocument['id']): Observable<Pick<IGuest, 'cart' | 'metrics'>> {
     return from(this.guest.findById(id)).pipe(
-      switchMap(guest => {
-        if (!guest) throw new NotFoundException('Guest was not found')
-        return this.updateMetrics(guest.id).pipe(
-          map(guest => guest.cart)
-        )
-      })
+      map(guest => ({
+        cart: guest.cart,
+        metrics: this.getMetrics(guest)
+      }))
     )
   }
 
-  public updateGuestCart(updateCartDto: UpdateCartDto, id: GuestDocument['id']): Observable<Pick<IGuest, 'cart' | 'metrics'>> {
-    if (!isValidObjectId(id) || !id) throw new BadRequestException('Provided invalid uid')
+  public guestCartAdd(
+    id: GuestDocument['id'],
+    updateGuestDto: UpdateGuestDto
+  ): Observable<Pick<IGuest, 'cart' | 'metrics'>> {
+    return from(this.products.getProduct(updateGuestDto.productId)).pipe(
+      switchMap(product => {
+        const queryOptions: QueryOptions = { new: true }
+        const updateQuery: UpdateQuery<GuestDocument> = {
+          $push: { 'cart.items': product}
+        }
 
-    const updateOptions: QueryOptions = { new: true }
-    const updateQuery: UpdateQuery<GuestDocument> = {
-      $set: { 'cart': updateCartDto.cart }
-    }
-
-    return from(this.guest.findByIdAndUpdate(id, updateQuery, updateOptions)).pipe(
-      switchMap(guest => {
-        if (!guest) throw new NotFoundException('Guest was not found')
-        return this.updateMetrics(guest.id).pipe(
+        return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
           map(guest => ({
             cart: guest.cart,
-            metrics: guest.metrics
+            metrics: this.getMetrics(guest)
           }))
         )
       })
     )
   }
 
-  public updateGuestWishlist(updateWishlistDto: UpdateWishlistDto, id: GuestDocument['id']): Observable<Pick<IGuest, 'wishlist' | 'metrics'>> {
-    if (!isValidObjectId(id) || !id) throw new BadRequestException('Provided invalid uid')
-
-    const updateOptions: QueryOptions = { new: true }
+  public guestCartRemove(
+    id: GuestDocument['id'],
+    updateGuestDto: UpdateGuestDto
+  ): Observable<Pick<IGuest, 'cart' | 'metrics'>> {
+    const queryOptions: QueryOptions = { new: true }
     const updateQuery: UpdateQuery<GuestDocument> = {
-      $set: { 'wishlist': updateWishlistDto.wishlist }
+      $pull: { 'cart.items': { '_id': new Types.ObjectId(updateGuestDto.productId) } }
     }
 
-    return from(this.guest.findByIdAndUpdate(id, updateQuery, updateOptions)).pipe(
-      switchMap(guest => {
-        if (!guest) throw new NotFoundException('Guest was not found')
-        return this.updateMetrics(guest.id).pipe(
+    return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
+      map(guest => ({
+        cart: guest.cart,
+        metrics: this.getMetrics(guest)
+      }))
+    )
+  }
+
+  public guestCartClear(id: GuestDocument['id']): Observable<Pick<IGuest, 'cart' | 'metrics'>> {
+    const queryOptions: QueryOptions = { new: true }
+    const updateQuery: UpdateQuery<GuestDocument> = {
+      $set: { 'cart.items': [] }
+    }
+
+    return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
+      map(guest => ({
+        cart: guest.cart,
+        metrics: this.getMetrics(guest)
+      }))
+    )
+  }
+
+  public guestWishlistAdd(
+    id: GuestDocument['id'],
+    updateGuestDto: UpdateGuestDto
+  ): Observable<Pick<IGuest, 'wishlist' | 'metrics'>> {
+    return from(this.products.getProduct(updateGuestDto.productId)).pipe(
+      switchMap(product => {
+        const queryOptions: QueryOptions = { new: true }
+        const updateQuery: UpdateQuery<GuestDocument> = {
+          $push: { 'wishlist.items': product}
+        }
+
+        return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
           map(guest => ({
             wishlist: guest.wishlist,
-            metrics: guest.metrics
+            metrics: this.getMetrics(guest)
           }))
         )
       })
     )
   }
 
-  public updateGuestViewed(updateViewedDto: UpdateViewedDto, id: GuestDocument['id']): Observable<Pick<IGuest, 'viewed' | 'metrics'>> {
-    if (!isValidObjectId(id) || !id) throw new BadRequestException('Provided invalid uid')
-
-    const updateOptions: QueryOptions = { new: true }
+  public guestWishlistRemove(
+    id: GuestDocument['id'], 
+    updateGuestDto: UpdateGuestDto
+  ): Observable<Pick<IGuest, 'wishlist' | 'metrics'>> {
+    const queryOptions: QueryOptions = { new: true }
     const updateQuery: UpdateQuery<GuestDocument> = {
-      $set: { 'viewed': updateViewedDto.viewed }
+      $pull: { 'wishlist.items': { '_id': new Types.ObjectId(updateGuestDto.productId) } }
     }
 
-    return from(this.guest.findByIdAndUpdate(id, updateQuery, updateOptions)).pipe(
-      switchMap(guest => {
-        if (!guest) throw new NotFoundException('Guest was not found')
-        return this.updateMetrics(guest.id).pipe(
+    return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
+      map(guest => ({
+        wishlist: guest.wishlist,
+        metrics: this.getMetrics(guest)
+      }))
+    )
+  }
+
+  public guestWishlistClear(id: GuestDocument['id']): Observable<Pick<IGuest, 'wishlist' | 'metrics'>> {
+    const queryOptions: QueryOptions = { new: true }
+    const updateQuery: UpdateQuery<GuestDocument> = {
+      $set: { 'wishlist.items': [] }
+    }
+
+    return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
+      map(guest => ({
+        wishlist: guest.wishlist,
+        metrics: this.getMetrics(guest)
+      }))
+    )
+  }
+
+  public guestViewedAdd(
+    id: GuestDocument['id'],
+    updateGuestDto: UpdateGuestDto
+  ): Observable<Pick<IGuest, 'viewed' | 'metrics'>> {
+    return from(this.products.getProduct(updateGuestDto.productId)).pipe(
+      switchMap(product => {
+        const queryOptions: QueryOptions = { new: true }
+        const updateQuery: UpdateQuery<GuestDocument> = {
+          $push: { 'viewed.items': product}
+        }
+
+        return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
           map(guest => ({
             viewed: guest.viewed,
-            metrics: guest.metrics
+            metrics: this.getMetrics(guest)
           }))
         )
       })
+    )
+  }
+
+  public guestViewedRemove(
+    id: GuestDocument['id'],
+    updateGuestDto: UpdateGuestDto
+  ): Observable<Pick<IGuest, 'viewed' | 'metrics'>> {
+    const queryOptions: QueryOptions = { new: true }
+    const updateQuery: UpdateQuery<GuestDocument> = {
+      $pull: { 'viewed.items': { '_id': new Types.ObjectId(updateGuestDto.productId) } }
+    }
+
+    return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
+      map(guest => ({
+        viewed: guest.viewed,
+        metrics: this.getMetrics(guest)
+      }))
+    )
+  }
+  
+  public guestViewedClear(id: GuestDocument['id']): Observable<Pick<IGuest, 'viewed' | 'metrics'>> {
+    const queryOptions: QueryOptions = { new: true }
+    const updateQuery: UpdateQuery<GuestDocument> = {
+      $set: { 'viewed.items': [] }
+    }
+
+    return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
+      map(guest => ({
+        viewed: guest.viewed,
+        metrics: this.getMetrics(guest)
+      }))
     )
   }
 
@@ -134,23 +223,12 @@ export class GuestsService {
     return from(this.guest.create(initialGuest))
   }
 
-  private updateMetrics(id: GuestDocument['id']): Observable<GuestDocument> {
-    if (!isValidObjectId(id) || !id) throw new BadRequestException('Provided invalid uid')
-
-    return from(this.guest.findById(id)).pipe(
-      switchMap(guest => {
-        if (!guest) throw new NotFoundException('Guest was not found')
-        const options: QueryOptions = { new: true }
-        const updateQuery: UpdateQuery<GuestDocument> = {
-          $set: { 
-            'metrics.cart': guest.cart.items.length,
-            'metrics.wishlist': guest.wishlist.items.length,
-            'metrics.viewed': guest.viewed.items.length,
-            'metrics.activity': Date.now()
-          }
-        }
-        return from(this.guest.findByIdAndUpdate(guest.id, updateQuery, options))
-      })
-    )
+  private getMetrics(guest: GuestDocument): IGuest['metrics'] {
+    return {
+      cart: guest.cart.items.length,
+      wishlist: guest.wishlist.items.length,
+      viewed: guest.viewed.items.length,
+      activity: Date.now()
+    }
   }
 }
