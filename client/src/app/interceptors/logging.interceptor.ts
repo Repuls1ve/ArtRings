@@ -20,13 +20,9 @@ export class LoggingInterceptor implements HttpInterceptor {
     const nowTime = Date.now()
 
     return next.handle(request).pipe(
-      tap(event => {
-        if (event instanceof HttpResponse) {
-          this.status = 'succeded'
-        }
-        else {
-          this.status = 'error'
-        }
+      tap({
+        next: () => this.status = 'succeded',
+        error: () => this.status = 'error'
       }),
       finalize(() => {  
         this.elapsed = Date.now() - nowTime
