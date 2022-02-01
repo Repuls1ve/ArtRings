@@ -11,37 +11,30 @@ import { IProduct } from '../models/product.model'
 })
 export class CartService {
   private readonly baseURL = environment.baseURL
+  private readonly options = { withCredentials: true }
 
   constructor(private readonly http: HttpClient) {}
 
   public loadCart(): Observable<Pick<IGuest, 'cart' | 'metrics'>> {
-    const options = { withCredentials: true }
-
-    return this.http.get<IResponse<Pick<IGuest, 'cart' | 'metrics'>>>(this.baseURL + 'guests/cart', options).pipe(
+    return this.http.get<IResponse<Pick<IGuest, 'cart' | 'metrics'>>>(this.baseURL + 'guests/cart', this.options).pipe(
       map(({data}) => data)
     )
   }
 
   public addProduct(id: IProduct['_id']): Observable<Pick<IGuest, 'cart' | 'metrics'>> {
-    const options = { withCredentials: true }
-
-    return this.http.get<IResponse<Pick<IGuest, 'cart' | 'metrics'>>>(this.baseURL + 'guests/cart/add', options).pipe(
+    return this.http.patch<IResponse<Pick<IGuest, 'cart' | 'metrics'>>>(this.baseURL + `guests/cart/add/${id}`, null, this.options).pipe(
       map(({data}) => data)
     )
   }
 
   public removeProduct(id: IProduct['_id']): Observable<Pick<IGuest, 'cart' | 'metrics'>> {
-    const options = { withCredentials: true }
-
-    return this.http.get<IResponse<Pick<IGuest, 'cart' | 'metrics'>>>(this.baseURL + 'guests/cart/remove', options).pipe(
+    return this.http.patch<IResponse<Pick<IGuest, 'cart' | 'metrics'>>>(this.baseURL + `guests/cart/remove/${id}`, null, this.options).pipe(
       map(({data}) => data)
     )
   }
 
   public clearCart(): Observable<Pick<IGuest, 'cart' | 'metrics'>> {
-    const options = { withCredentials: true }
-
-    return this.http.get<IResponse<Pick<IGuest, 'cart' | 'metrics'>>>(this.baseURL + 'guests/cart/clear', options).pipe(
+    return this.http.patch<IResponse<Pick<IGuest, 'cart' | 'metrics'>>>(this.baseURL + 'guests/cart/clear', null, this.options).pipe(
       map(({data}) => data)
     )
   }
