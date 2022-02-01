@@ -16,10 +16,8 @@ export class GuestEffects {
   public identifyGuest$ = createEffect(() => this.actions$.pipe(
     ofType(identifyGuest),
     switchMap(() => this.guestService.identifyGuest().pipe(
-      map(payload => {
-        this.initializationService.completeInitialization()
-        return identifyGuestSuccess({data: payload})
-      }),
+      tap(() => this.initializationService.completeInitialization()),
+      map(payload => identifyGuestSuccess({data: payload})),
       retryWhen(error => error.pipe(
         delay(1000),
         take(3)

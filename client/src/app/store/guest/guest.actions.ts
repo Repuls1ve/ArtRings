@@ -14,3 +14,8 @@ export const identifyGuestFailure = createAction(
   '[Guest] Identify Guest Failure',
   props<{error: string}>()
 )
+
+export const updateGuestMetrics = createAction(
+  '[Guest] Update Guest Metrics',
+  props<{data: IGuest['metrics']}>()
+)

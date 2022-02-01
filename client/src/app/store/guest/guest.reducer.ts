@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store'
 import { IGuest } from 'src/app/models/guest.model'
 import { status } from '../app.reducers'
-import { identifyGuest, identifyGuestFailure, identifyGuestSuccess } from './guest.actions'
+import { identifyGuest, identifyGuestFailure, identifyGuestSuccess, updateGuestMetrics } from './guest.actions'
 
 export interface GuestState {
   status: status
@@ -31,5 +31,9 @@ export const guestReducer = createReducer(
     ...state,
     status: 'error',
     error: payload.error
+  })),
+  on(updateGuestMetrics, (state, payload) => ({
+    ...state,
+    data: payload.data
   }))
 )
