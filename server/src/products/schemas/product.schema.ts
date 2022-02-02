@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { ModelDefinition, Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
 import { IProduct } from '../interfaces/product.interface'
 
@@ -22,7 +22,7 @@ export class Product implements IProduct {
     type: Object,
     required: true
   })
-  prices: IProduct['prices']
+  price: IProduct['price']
 
   @Prop({
     type: [Object],
@@ -73,3 +73,8 @@ export class Product implements IProduct {
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product)
+
+export const ProductModelDefinition: ModelDefinition = {
+  name: Product.name,
+  schema: ProductSchema
+}
