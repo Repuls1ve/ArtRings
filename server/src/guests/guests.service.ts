@@ -144,7 +144,7 @@ export class GuestsService {
   public guestCartClear(id: GuestDocument['id']): Observable<Pick<IGuest, 'cart' | 'metrics'>> {
     const queryOptions: QueryOptions = { new: true }
     const updateQuery: UpdateQuery<GuestDocument> = {
-      $set: { 'cart.items': [] }
+      $set: { 'cart.items': [], 'cart.summary': 0 }
     }
 
     return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
