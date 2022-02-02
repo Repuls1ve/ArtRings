@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { Types, Model, QueryOptions, UpdateQuery } from 'mongoose'
+import { Types, Model, QueryOptions, UpdateQuery, Document, FilterQuery } from 'mongoose'
 import { catchError, from, map, Observable, of, switchMap } from 'rxjs'
 import { ProductsService } from 'src/products/products.service'
+import { ProductDocument } from 'src/products/schemas/product.schema'
 import { UpdateGuestDto } from './dtos/update-guest.dto'
-import { IGuest } from './interfaces/guest.interface'
+import { ICartItem, IGuest } from './interfaces/guest.interface'
 import { Guest, GuestDocument } from './schemas/guest.schema'
 
 @Injectable()
@@ -43,19 +44,44 @@ export class GuestsService {
     updateGuestDto: UpdateGuestDto
   ): Observable<Pick<IGuest, 'cart' | 'metrics'>> {
     return from(this.products.getProduct(updateGuestDto.productId)).pipe(
-      switchMap(product => {
-        const queryOptions: QueryOptions = { new: true }
-        const updateQuery: UpdateQuery<GuestDocument> = {
-          $push: { 'cart.items': product}
-        }
+      switchMap(product => from(this.guest.findById(id)).pipe(
+        switchMap(guest => {
+          const queryOptions: QueryOptions = { new: true }
+          const cartItem = guest.cart.items.find(item => item['_id'].equals(product._id))
+          if (!cartItem) {
+            const newCartItem = this.toCartItem(product, 1)
+            const updateQuery: UpdateQuery<GuestDocument> = {
+              $push: { 'cart.items': newCartItem },
+              $set: { 'cart.summary': guest.cart.items.map(item =>
+                item.total).reduce((a, b) => a + b, 0) + product.price }
+            }
 
-        return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
-          map(guest => ({
-            cart: guest.cart,
-            metrics: this.getMetrics(guest)
-          }))
-        )
-      })
+            return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
+              map(guest => ({
+                cart: guest.cart,
+                metrics: this.getMetrics(guest)
+              }))
+            )
+          }
+          const filterQuery: FilterQuery<GuestDocument> = {
+            _id: id, 'cart.items._id': product._id
+          }
+          const updateQuery: UpdateQuery<GuestDocument> = {
+            $set: {
+              'cart.items.$': this.toCartItem(product, cartItem.quantity + 1),
+              'cart.summary': guest.cart.items.map(item =>
+                item.total).reduce((a, b) => a + b, 0) + product.price
+            }
+          }
+
+          return from(this.guest.findOneAndUpdate(filterQuery, updateQuery, queryOptions)).pipe(
+            map(guest => ({
+              cart: guest.cart,
+              metrics: this.getMetrics(guest)
+            }))
+          )
+        })
+      ))
     )
   }
 
@@ -63,16 +89,55 @@ export class GuestsService {
     id: GuestDocument['id'],
     updateGuestDto: UpdateGuestDto
   ): Observable<Pick<IGuest, 'cart' | 'metrics'>> {
-    const queryOptions: QueryOptions = { new: true }
-    const updateQuery: UpdateQuery<GuestDocument> = {
-      $pull: { 'cart.items': { '_id': new Types.ObjectId(updateGuestDto.productId) } }
-    }
+    return from(this.products.getProduct(updateGuestDto.productId)).pipe(
+      switchMap(product => from(this.guest.findById(id)).pipe(
+        switchMap(guest => {
+          const queryOptions: QueryOptions = { new: true }
+          const cartItem = guest.cart.items.find(item => item['_id'].equals(product._id))
 
-    return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
-      map(guest => ({
-        cart: guest.cart,
-        metrics: this.getMetrics(guest)
-      }))
+          if (!cartItem) {
+            return of({
+              cart: guest.cart,
+              metrics: this.getMetrics(guest)
+            })
+          }
+
+          if (cartItem.quantity <= 1) {
+            const updateQuery: UpdateQuery<GuestDocument> = {
+              $pull: { 'cart.items': { '_id': new Types.ObjectId(updateGuestDto.productId) } },
+              $set: { 'cart.summary': guest.cart.items.map(item =>
+                item.total).reduce((a, b) => a + b, 0) - product.price
+              }
+            }
+
+            return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
+              map(guest => ({
+                cart: guest.cart,
+                metrics: this.getMetrics(guest)
+              }))
+            )
+          }
+          else {
+            const filterQuery: FilterQuery<GuestDocument> = {
+              _id: id, 'cart.items._id': new Types.ObjectId(updateGuestDto.productId)
+            }
+            const updateQuery: UpdateQuery<GuestDocument> = {
+              $set: {
+                'cart.items.$': this.toCartItem(product, cartItem.quantity - 1),
+                'cart.summary': guest.cart.items.map(item =>
+                  item.total).reduce((a, b) => a + b, 0) - product.price
+              }
+            }
+
+            return from(this.guest.findOneAndUpdate(filterQuery, updateQuery, queryOptions)).pipe(
+              map(guest => ({
+                cart: guest.cart,
+                metrics: this.getMetrics(guest)
+              }))
+            )
+          }
+        })
+      ))
     )
   }
 
@@ -211,7 +276,7 @@ export class GuestsService {
       },
       cart: {
         items: [],
-        summary: {}
+        summary: 0
       },
       viewed: {
         items: []
@@ -225,10 +290,19 @@ export class GuestsService {
 
   private getMetrics(guest: GuestDocument): IGuest['metrics'] {
     return {
-      cart: guest.cart.items.length,
+      cart: guest.cart.items.map(item => item.quantity).reduce((a, b) => a + b, 0),
       wishlist: guest.wishlist.items.length,
       viewed: guest.viewed.items.length,
       activity: Date.now()
+    }
+  }
+
+  private toCartItem(document: ProductDocument, quantity: ICartItem['quantity']): ICartItem & Document['_id'] {
+    const product = document.toJSON()
+    return {
+      ...product,
+      quantity: quantity,
+      total: product.price * quantity,
     }
   }
 }
