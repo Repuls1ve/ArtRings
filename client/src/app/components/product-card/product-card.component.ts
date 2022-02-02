@@ -9,9 +9,7 @@ const mockProduct: IProduct = {
   identifier: '019',
   description: '',
   material: '',
-  prices: {
-    'RUB': 59600
-  },
+  price: 56900,
   production: 0,
   sizes: {
     female: [],
@@ -51,8 +49,4 @@ export class ProductCardComponent {
 
   @Input('price.fontSize.px')
   public priceFontSize = 16
-
-  getPrice(currency: string): number {
-    return this.product.prices[currency]
-  }
 }

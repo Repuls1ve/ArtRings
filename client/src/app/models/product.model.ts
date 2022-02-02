@@ -4,7 +4,7 @@ export interface IProduct {
   _id: string
   identifier: string
   description: string
-  prices: IProductPrices
+  price: IProductPrice
   sizes: IProductSizes
   reviews: IProductReview[]
   images: IProductImage[]
@@ -15,9 +15,7 @@ export interface IProduct {
   stock: boolean
 }
 
-export interface IProductPrices {
-  [currency: string]: number
-}
+export type IProductPrice = number
 
 export interface IProductSizes {
   male: number[]  
@@ -25,7 +23,7 @@ export interface IProductSizes {
 }
 
 export interface IProductDiscount {
-  previous: IProductPrices
+  previous: IProductPrice
 }
 
 export interface IProductReview {

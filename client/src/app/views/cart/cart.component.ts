@@ -1,6 +1,9 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { MediaObserver } from '@angular/flex-layout'
+import { Store } from '@ngrx/store'
 import { ICart, ICartItem } from 'src/app/models/guest.model'
+import { AppState } from 'src/app/store/app.state'
+import { loadCart } from 'src/app/store/cart/cart.actions'
 
 const mockCartItem: ICartItem = {
   _id: '',
@@ -10,9 +13,7 @@ const mockCartItem: ICartItem = {
   identifier: '019',
   description: '',
   material: '',
-  prices: {
-    'RUB': 59600
-  },
+  price: 59600,
   production: 0,
   sizes: {
     female: [],
@@ -34,9 +35,7 @@ const mockCartItem: ICartItem = {
     }
   ],
   quantity: 3,
-  total: {
-    'RUB': 178800
-  }
+  total: 178800
 }
 
 @Component({
@@ -44,16 +43,21 @@ const mockCartItem: ICartItem = {
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
   public cart: ICart = {
     items: [
       mockCartItem,
       mockCartItem
     ],
-    summary: {
-      'RUB': 268200
-    }
+    summary: 268200
   }
 
-  constructor(public readonly media: MediaObserver) {}
+  constructor(
+    public readonly media: MediaObserver,
+    private readonly store: Store<AppState>  
+  ) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(loadCart())
+  }
 }

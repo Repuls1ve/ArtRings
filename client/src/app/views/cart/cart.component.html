@@ -25,7 +25,7 @@
             [value]="item.quantity"
             ></app-quantity-toggler>
           </td>
-          <td>{{ item.total['RUB'] }} &#8381;</td>
+          <td>{{ item.total }} &#8381;</td>
         </tr>
       </table>
       <ng-template #itemsMobile>
@@ -37,7 +37,7 @@
             >
           </div>
           <div class="descriptions">
-            <span class="price">{{ item.total['RUB'] }} &#8381;</span>
+            <span class="price">{{ item.total }} &#8381;</span>
             <span class="identifier">Арт. {{ item.identifier }}</span>
             <app-quantity-toggler
             [value]="item.quantity"
@@ -56,7 +56,7 @@
     <div class="summary">
       <div class="summary-text">
         <span class="total">Итого:</span>
-        <span class="price">{{cart.summary['RUB']}} &#8381;</span>
+        <span class="price">{{ cart.summary }} &#8381;</span>
       </div>
       <app-button
       text="Оформить заказ"

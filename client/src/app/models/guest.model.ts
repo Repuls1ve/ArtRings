@@ -9,12 +9,12 @@ export interface IGuest {
 
 export interface ICart {
   items: ICartItem[]
-  summary: IProduct['prices']
+  summary: IProduct['price']
 }
 
 export interface ICartItem extends IProduct {
   quantity: number
-  total: IProduct['prices']
+  total: IProduct['price']
 }
 
 export interface IMetrics {
