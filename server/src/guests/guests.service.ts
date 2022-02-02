@@ -39,6 +39,24 @@ export class GuestsService {
     )
   }
 
+  public getGuestWishlist(id: GuestDocument['id']): Observable<Pick<IGuest, 'wishlist' | 'metrics'>> {
+    return from(this.guest.findById(id)).pipe(
+      map(guest => ({
+        wishlist: guest.wishlist,
+        metrics: this.getMetrics(guest)
+      }))
+    )
+  }
+
+  public getGuestViewed(id: GuestDocument['id']): Observable<Pick<IGuest, 'viewed' | 'metrics'>> {
+    return from(this.guest.findById(id)).pipe(
+      map(guest => ({
+        viewed: guest.viewed,
+        metrics: this.getMetrics(guest)
+      }))
+    )
+  }
+
   public guestCartAdd(
     id: GuestDocument['id'],
     updateGuestDto: UpdateGuestDto

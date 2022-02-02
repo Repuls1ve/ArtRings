@@ -43,6 +43,22 @@ export class GuestsController {
     return this.guests.getGuestCart(uid).pipe(map(data => ({data})))
   }
 
+  @Get('wishlist')
+  @UseGuards(GuestGuard)
+  public getGuestWishlist(
+    @Cookies(GuestCookiesKeys.UID) uid: GuestDocument['id']
+  ): Observable<IResponse<Pick<IGuest, 'wishlist' | 'metrics'>>> {
+    return this.guests.getGuestWishlist(uid).pipe(map(data => ({data})))
+  }
+
+  @Get('viewed')
+  @UseGuards(GuestGuard)
+  public getGuestViewed(
+    @Cookies(GuestCookiesKeys.UID) uid: GuestDocument['id']
+  ): Observable<IResponse<Pick<IGuest, 'viewed' | 'metrics'>>> {
+    return this.guests.getGuestViewed(uid).pipe(map(data => ({data})))
+  }
+
   @Patch('cart/add/:productId')
   @UseGuards(GuestGuard)
   public guestCartAdd(
