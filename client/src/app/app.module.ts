@@ -26,7 +26,8 @@ import { AppStoreModule } from './store/app-store.module'
 import { LoggingInterceptorProvider } from './interceptors/logging.interceptor'
 import { PaginationComponent } from './components/pagination/pagination.component'
 import { AboutComponent } from './views/about/about.component';
-import { ShippingComponent } from './views/shipping/shipping.component'
+import { ShippingComponent } from './views/shipping/shipping.component';
+import { GuaranteesComponent } from './views/guarantees/guarantees.component'
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ShippingComponent } from './views/shipping/shipping.component'
     PaginationComponent,
     AboutComponent,
     ShippingComponent,
+    GuaranteesComponent,
   ],
   imports: [
     BrowserModule,
