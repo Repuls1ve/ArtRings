@@ -1,0 +1,48 @@
+@use "src/assets/scss/colors";
+@use "src/assets/scss/typography";
+@use "src/assets/scss/breakpoints";
+
+.shipping-section {
+  padding: 6rem 8% 9rem;
+  background-image: url("/assets/img/shipping-background.png");
+  background-position: center;
+  background-size: cover;
+
+  .title {
+    text-transform: uppercase;
+    font-size: 2.8125rem;
+
+    @include breakpoints.new(600px) {
+      font-size: 2.3rem;
+    }
+  }
+
+  .descriptions {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 30%;
+
+    p {
+      font-size: 0.875rem;
+      font-weight: typography.$medium;
+    }
+
+    @include breakpoints.new(1500px) {
+      max-width: 45%;
+    }
+
+    @include breakpoints.new(1200px) {
+      max-width: 60%;
+    }
+
+    @include breakpoints.tablet {
+      max-width: 75%;
+    }
+
+    @include breakpoints.new(700px) {
+      max-width: 100%;
+    }
+  }
+}
