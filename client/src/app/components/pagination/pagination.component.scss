@@ -3,13 +3,13 @@
 @use "src/assets/scss/breakpoints";
 
 :host {
-  width: 100%;
+  width: auto;
 }
 
 .pagination {
-  width: inherit;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  gap: 2rem;
 
   .pagination-pages {
     display: flex;

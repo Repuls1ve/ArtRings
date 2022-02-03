@@ -1,13 +1,13 @@
 <div class="container">
   <div class="heading">
     <h2 class="title">Избранное</h2>
-    <button class="clear">Удалить все</button>
+    <button class="clear" (click)="clearWishlist()">Удалить все</button>
   </div>
-  <div class="content">
+  <div class="content" *ngIf="wishlist$ | async as wishlist">
     <div class="wished-items-container">
       <div class="wished-items">
-        <div class="wished-item" *ngFor="let i of [].constructor(4)">
-          <app-product-card></app-product-card>
+        <div class="wished-item" *ngFor="let item of wishlist.data.items?.slice((page - 1) * pageSize, page * pageSize)">
+          <app-product-card [product]="item"></app-product-card>
         </div>
       </div>
       <div class="sale-banner" *ngIf="media.isActive('gt-sm')">
@@ -19,8 +19,12 @@
       </div>
     </div>
     <app-pagination
-    [totalItems]="31"
-    [pageSize]="4"
+    class="wishlist-pagination"
+    *ngIf="(wishlist.data.items?.length || 0) > pageSize"
+    [totalItems]="wishlist.data.items?.length || 0"
+    [pageSize]="pageSize"
+    (pageChange)="onPageChange($event)"
+    [controlsName]="media.isActive('gt-xs')"
     ></app-pagination>
   </div>
 </div>
