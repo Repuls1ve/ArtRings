@@ -4,6 +4,7 @@ import { CartComponent } from '../views/cart/cart.component'
 import { CustomComponent } from '../views/custom/custom.component'
 import { HomeComponent } from '../views/home/home.component'
 import { NotFoundComponent } from '../views/not-found/not-found.component'
+import { ShippingComponent } from '../views/shipping/shipping.component'
 import { WishlistComponent } from '../views/wishlist/wishlist.component'
 
 export const routes: Routes = [
@@ -26,6 +27,10 @@ export const routes: Routes = [
   {
     path: 'wishlist',
     component: WishlistComponent
+  },
+  {
+    path: 'shipping',
+    component: ShippingComponent
   },
   {
     path: '**',
