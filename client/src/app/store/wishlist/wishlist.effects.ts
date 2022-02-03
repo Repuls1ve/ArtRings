@@ -21,7 +21,7 @@ export class WishlistEffects {
       switchMap(() => this.wishlistService.loadWishlist().pipe(
         map(data => loadWishlistSuccess({data}))
       )),
-      catchError(error => of(loadWishlistFailure({error})))
+      catchError(error => of(loadWishlistFailure({error: error.message})))
     ))
   ))
 
@@ -29,7 +29,7 @@ export class WishlistEffects {
     ofType(addWished),
     switchMap(payload => this.wishlistService.addWished(payload.data).pipe(
       map(data => addWishedSuccess({data})),
-      catchError(error => of(addWishedFailure({error})))
+      catchError(error => of(addWishedFailure({error: error.message})))
     ))
   ))
 
@@ -37,7 +37,7 @@ export class WishlistEffects {
     ofType(removeWished),
     switchMap(payload => this.wishlistService.addWished(payload.data).pipe(
       map(data => removeWishedSuccess({data})),
-      catchError(error => of(removeWishedFailure({error})))
+      catchError(error => of(removeWishedFailure({error: error.message})))
     ))
   ))
 
@@ -45,7 +45,7 @@ export class WishlistEffects {
     ofType(clearWishlist),
     switchMap(() => this.wishlistService.clearWishlist().pipe(
       map(data => clearWishlistSuccess({data})),
-      catchError(error => of(clearWishlistFailure({error})))
+      catchError(error => of(clearWishlistFailure({error: error.message})))
     ))
   ))
 
