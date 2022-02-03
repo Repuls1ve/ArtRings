@@ -25,6 +25,7 @@ import { WishlistComponent } from './views/wishlist/wishlist.component'
 import { AppStoreModule } from './store/app-store.module'
 import { LoggingInterceptorProvider } from './interceptors/logging.interceptor'
 import { PaginationComponent } from './components/pagination/pagination.component'
+import { AboutComponent } from './views/about/about.component'
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     NotFoundComponent,
     WishlistComponent,
     PaginationComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
