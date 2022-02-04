@@ -32,6 +32,7 @@ import { ContactsComponent } from './views/contacts/contacts.component'
 import { AgmCoreModule } from '@agm/core'
 import { environment } from 'src/environments/environment'
 import { StudioComponent } from './views/studio/studio.component'
+import { WearingComponent } from './views/wearing/wearing.component'
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { StudioComponent } from './views/studio/studio.component'
     GuaranteesComponent,
     ContactsComponent,
     StudioComponent,
+    WearingComponent,
   ],
   imports: [
     BrowserModule,
