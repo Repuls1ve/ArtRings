@@ -1,0 +1,55 @@
+@use "src/assets/scss/colors";
+@use "src/assets/scss/typography";
+@use "src/assets/scss/breakpoints";
+
+.gift-section {
+  margin: 1rem 0 3rem;
+  padding: 0 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+
+  .gift-decoration {
+    margin-top: 2rem;
+
+    @include breakpoints.tablet {
+      margin-top: 1rem;
+    }
+
+    @include breakpoints.mobile {
+      margin-top: 0;
+    }
+  }
+
+  .descriptions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 50%;
+
+    strong,
+    p {
+      font-size: 0.875rem;
+      font-weight: typography.$medium;
+      text-align: center;
+    }
+
+    strong {
+      font-weight: typography.$bold;
+    }
+
+    @include breakpoints.tablet {
+      max-width: 80%;
+    }
+
+    @include breakpoints.mobile {
+      max-width: 100%;
+    }
+  }
+
+  .gift-image {
+    margin-top: 2rem;
+    height: auto;
+  }
+}

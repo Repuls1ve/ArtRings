@@ -3,6 +3,7 @@ import { AboutComponent } from '../views/about/about.component'
 import { CartComponent } from '../views/cart/cart.component'
 import { ContactsComponent } from '../views/contacts/contacts.component'
 import { CustomComponent } from '../views/custom/custom.component'
+import { GiftComponent } from '../views/gift/gift.component'
 import { GuaranteesComponent } from '../views/guarantees/guarantees.component'
 import { HomeComponent } from '../views/home/home.component'
 import { NotFoundComponent } from '../views/not-found/not-found.component'
@@ -51,6 +52,10 @@ export const routes: Routes = [
   {
     path: 'wearing',
     component: WearingComponent
+  },
+  {
+    path: 'gift',
+    component: GiftComponent
   },
   {
     path: '**',
