@@ -56,3 +56,18 @@ export const ContactsSliderImages: ISliderImage[] = [
     alt: 'studio'
   }
 ]
+
+export const StudioSliderImages: ISliderImage[] = [
+  {
+    source: '/assets/img/studio-1.png',
+    alt: 'studio'
+  },
+  {
+    source: '/assets/img/studio-2.png',
+    alt: 'studio'
+  },
+  {
+    source: '/assets/img/studio-3.png',
+    alt: 'studio'
+  }
+]

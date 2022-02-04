@@ -26,26 +26,49 @@ export const CustomCarouselImages: ISliderImage[] = [
 export const ContactsCarouselImages: ISliderImage[] = [
   {
     source: '/assets/img/studio-outside-1.png',
-    alt: 'studio'
+    alt: 'studio-outside'
   },
   {
     source: '/assets/img/studio-outside-2.png',
-    alt: 'studio'
+    alt: 'studio-outside'
   },
   {
     source: '/assets/img/studio-outside-3.png',
-    alt: 'studio'
+    alt: 'studio-outside'
   },
   {
     source: '/assets/img/studio-outside-2.png',
-    alt: 'studio'
+    alt: 'studio-outside'
   },
   {
     source: '/assets/img/studio-outside-1.png',
-    alt: 'studio'
+    alt: 'studio-outside'
   },
   {
     source: '/assets/img/studio-outside-3.png',
+    alt: 'studio-outside'
+  }
+]
+
+export const StudioCarouselImages: ISliderImage[] = [
+  {
+    source: '/assets/img/studio-1.png',
+    alt: 'studio'
+  },
+  {
+    source: '/assets/img/studio-2.png',
+    alt: 'studio'
+  },
+  {
+    source: '/assets/img/studio-3.png',
+    alt: 'studio'
+  },
+  {
+    source: '/assets/img/studio-2.png',
+    alt: 'studio'
+  },
+  {
+    source: '/assets/img/studio-1.png',
     alt: 'studio'
   }
 ]

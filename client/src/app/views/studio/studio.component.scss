@@ -1,0 +1,55 @@
+@use "src/assets/scss/colors";
+@use "src/assets/scss/typography";
+@use "src/assets/scss/breakpoints";
+
+.studio-section {
+  margin: 1rem 0 3rem;
+  padding: 0 8%;
+
+  .title {
+    text-transform: uppercase;
+    font-size: 2.8125rem;
+
+    @include breakpoints.new(600px) {
+      font-size: 2.3rem;
+    }
+  }
+
+  .content {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+
+    .descriptions-container {
+      display: flex;
+      margin-bottom: 3rem;
+
+      .descriptions {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        strong,
+        p {
+          font-size: 0.875rem;
+          font-weight: typography.$medium;
+          max-width: 65%;
+
+          @include breakpoints.tablet {
+            max-width: 100%;
+          }
+        }
+
+        strong {
+          font-weight: typography.$bold;
+        }
+      }
+
+      @include breakpoints.tablet {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  }
+}

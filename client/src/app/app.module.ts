@@ -25,9 +25,13 @@ import { WishlistComponent } from './views/wishlist/wishlist.component'
 import { AppStoreModule } from './store/app-store.module'
 import { LoggingInterceptorProvider } from './interceptors/logging.interceptor'
 import { PaginationComponent } from './components/pagination/pagination.component'
-import { AboutComponent } from './views/about/about.component';
-import { ShippingComponent } from './views/shipping/shipping.component';
+import { AboutComponent } from './views/about/about.component'
+import { ShippingComponent } from './views/shipping/shipping.component'
 import { GuaranteesComponent } from './views/guarantees/guarantees.component'
+import { ContactsComponent } from './views/contacts/contacts.component'
+import { AgmCoreModule } from '@agm/core'
+import { environment } from 'src/environments/environment'
+import { StudioComponent } from './views/studio/studio.component'
 
 @NgModule({
   declarations: [
@@ -53,11 +57,14 @@ import { GuaranteesComponent } from './views/guarantees/guarantees.component'
     AboutComponent,
     ShippingComponent,
     GuaranteesComponent,
+    ContactsComponent,
+    StudioComponent,
   ],
   imports: [
     BrowserModule,
     FlexLayoutModule,
     HttpClientModule,
+    AgmCoreModule.forRoot({apiKey: environment.GMApiKey}),
     AppRoutingModule,
     AppStoreModule
   ],
