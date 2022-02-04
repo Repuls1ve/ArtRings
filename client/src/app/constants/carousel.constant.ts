@@ -22,3 +22,30 @@ export const CustomCarouselImages: ISliderImage[] = [
     alt: 'rings'
   }
 ]
+
+export const ContactsCarouselImages: ISliderImage[] = [
+  {
+    source: '/assets/img/studio-outside-1.png',
+    alt: 'studio'
+  },
+  {
+    source: '/assets/img/studio-outside-2.png',
+    alt: 'studio'
+  },
+  {
+    source: '/assets/img/studio-outside-3.png',
+    alt: 'studio'
+  },
+  {
+    source: '/assets/img/studio-outside-2.png',
+    alt: 'studio'
+  },
+  {
+    source: '/assets/img/studio-outside-1.png',
+    alt: 'studio'
+  },
+  {
+    source: '/assets/img/studio-outside-3.png',
+    alt: 'studio'
+  }
+]

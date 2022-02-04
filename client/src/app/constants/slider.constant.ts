@@ -42,3 +42,17 @@ export const CustomSliderImages: ISliderImage[] = [
   }
 ]
 
+export const ContactsSliderImages: ISliderImage[] = [
+  {
+    source: '/assets/img/studio-outside-1.png',
+    alt: 'studio'
+  },
+  {
+    source: '/assets/img/studio-outside-2.png',
+    alt: 'studio'
+  },
+  {
+    source: '/assets/img/studio-outside-3.png',
+    alt: 'studio'
+  }
+]

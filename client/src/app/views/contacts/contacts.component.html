@@ -1,0 +1,31 @@
+<section class="contacts-section">
+  <h2 class="title">Контакты</h2>
+  <p class="description">Наша студия переехала с ул. Никольской на Арбат. Теперь у нас ещё просторнее, уютнее и больше красивых колечек!</p>
+  <agm-map
+  class="google-map"
+  [latitude]="55.7547778"
+  [longitude]="37.6034414"
+  [styles]="styles"
+  [zoom]="14"
+  >
+    <agm-marker
+    [latitude]="55.7547778"
+    [longitude]="37.6034414"
+    ></agm-marker>
+  </agm-map>
+</section>
+<section class="photos-section">
+  <h2 class="title">Фото студии с улицы</h2>
+  <app-carousel *ngIf="media.isActive('gt-xs'); else sliderMobile">
+    <app-carousel-item *ngFor="let image of carousel">
+      <img
+      [src]="image.source"
+      [alt]="image.alt"
+      height="400px"
+      >
+    </app-carousel-item>
+  </app-carousel>
+  <ng-template #sliderMobile>
+    <app-slider [images]="slider"></app-slider>
+  </ng-template>
+</section>

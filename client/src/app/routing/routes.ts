@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router'
 import { AboutComponent } from '../views/about/about.component'
 import { CartComponent } from '../views/cart/cart.component'
+import { ContactsComponent } from '../views/contacts/contacts.component'
 import { CustomComponent } from '../views/custom/custom.component'
 import { GuaranteesComponent } from '../views/guarantees/guarantees.component'
 import { HomeComponent } from '../views/home/home.component'
@@ -36,6 +37,10 @@ export const routes: Routes = [
   {
     path: 'guarantees',
     component: GuaranteesComponent
+  },
+  {
+    path: 'contacts',
+    component: ContactsComponent
   },
   {
     path: '**',
