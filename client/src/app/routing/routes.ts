@@ -7,6 +7,7 @@ import { GiftComponent } from '../views/gift/gift.component'
 import { GuaranteesComponent } from '../views/guarantees/guarantees.component'
 import { HomeComponent } from '../views/home/home.component'
 import { NotFoundComponent } from '../views/not-found/not-found.component'
+import { PrivacyComponent } from '../views/privacy/privacy.component'
 import { ShippingComponent } from '../views/shipping/shipping.component'
 import { StudioComponent } from '../views/studio/studio.component'
 import { WearingComponent } from '../views/wearing/wearing.component'
@@ -56,6 +57,10 @@ export const routes: Routes = [
   {
     path: 'gift',
     component: GiftComponent
+  },
+  {
+    path: 'privacy',
+    component: PrivacyComponent
   },
   {
     path: '**',

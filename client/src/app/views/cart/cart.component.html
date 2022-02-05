@@ -1,9 +1,9 @@
 <div class="container">
   <div class="heading">
     <h2 class="title">Корзина</h2>
-    <button class="clear">Удалить все</button>
+    <button class="clear" (click)="clearCart()" >Удалить все</button>
   </div>
-  <div class="content">
+  <div class="content" *ngIf="cart$ | async as cart">
     <div class="cart-items">
       <table *ngIf="media.isActive('gt-xs'); else itemsMobile">
         <tr>
@@ -12,7 +12,7 @@
           <th>Кол-во</th>
           <th>Цена</th>
         </tr>
-        <tr class="cart-item" *ngFor="let item of cart.items">
+        <tr class="cart-item" *ngFor="let item of cart.data.items">
           <td>
             <img
             [src]="item.images[0].source"
@@ -23,13 +23,15 @@
           <td>
             <app-quantity-toggler
             [value]="item.quantity"
+            (increased)="addProduct(item._id)"
+            (decreased)="removeProduct(item._id)"
             ></app-quantity-toggler>
           </td>
           <td>{{ item.total }} &#8381;</td>
         </tr>
       </table>
       <ng-template #itemsMobile>
-        <div class="cart-item-mobile" *ngFor="let item of cart.items">
+        <div class="cart-item-mobile" *ngFor="let item of cart.data.items">
           <div class="image">
             <img
             [src]="item.images[0].source"
@@ -41,6 +43,8 @@
             <span class="identifier">Арт. {{ item.identifier }}</span>
             <app-quantity-toggler
             [value]="item.quantity"
+            (increased)="addProduct(item._id)"
+            (decreased)="removeProduct(item._id)"
             ></app-quantity-toggler>
           </div>
           <button class="remove">
@@ -56,7 +60,7 @@
     <div class="summary">
       <div class="summary-text">
         <span class="total">Итого:</span>
-        <span class="price">{{ cart.summary }} &#8381;</span>
+        <span class="price">{{ cart.data.summary || 0 }} &#8381;</span>
       </div>
       <app-button
       text="Оформить заказ"

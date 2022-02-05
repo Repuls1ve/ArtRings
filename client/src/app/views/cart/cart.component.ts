@@ -1,42 +1,10 @@
 import { Component, OnInit } from '@angular/core'
 import { MediaObserver } from '@angular/flex-layout'
 import { Store } from '@ngrx/store'
-import { ICart, ICartItem } from 'src/app/models/guest.model'
+import { IProduct } from 'src/app/models/product.model'
 import { AppState } from 'src/app/store/app.state'
-import { loadCart } from 'src/app/store/cart/cart.actions'
-
-const mockCartItem: ICartItem = {
-  _id: '',
-  reviews: [],
-  discount: null,
-  rating: 4,
-  identifier: '019',
-  description: '',
-  material: '',
-  price: 59600,
-  production: 0,
-  sizes: {
-    female: [],
-    male: []
-  },
-  stock: true,
-  images: [
-    {
-      source: '/assets/img/product-image-2.png',
-      alt: 'rings'
-    },
-    {
-      source: '/assets/img/product-image-2.png',
-      alt: 'rings'
-    },
-    {
-      source: '/assets/img/product-image-2.png',
-      alt: 'rings'
-    }
-  ],
-  quantity: 3,
-  total: 178800
-}
+import { addProduct, clearCart, loadCart, removeProduct } from 'src/app/store/cart/cart.actions'
+import { selectCart } from 'src/app/store/cart/cart.selectors'
 
 @Component({
   selector: 'app-cart',
@@ -44,13 +12,7 @@ const mockCartItem: ICartItem = {
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  public cart: ICart = {
-    items: [
-      mockCartItem,
-      mockCartItem
-    ],
-    summary: 268200
-  }
+  public cart$ = this.store.select(selectCart)
 
   constructor(
     public readonly media: MediaObserver,
@@ -59,5 +21,17 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadCart())
+  }
+
+  public addProduct(id: IProduct['_id']): void {
+    this.store.dispatch(addProduct({data: id}))
+  }
+
+  public removeProduct(id: IProduct['_id']): void {
+    this.store.dispatch(removeProduct({data: id}))
+  }
+
+  public clearCart(): void {
+    this.store.dispatch(clearCart())
   }
 }
