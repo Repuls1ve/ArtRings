@@ -53,13 +53,13 @@
       <nav class="nav-links-wrapper" *ngIf="media.isActive('gt-md'); else brand">
         <ul class="nav-links">
           <li>
-            <a>Обручальные кольца</a>
+            <a routerLink="/catalog/weddings-rings" [queryParams]="{ page: 1 }">Обручальные кольца</a>
           </li>
           <li>
-            <a>Помолвочные кольца</a>
+            <a routerLink="/catalog/engagement-rings" [queryParams]="{ page: 1 }">Помолвочные кольца</a>
           </li>
           <li>
-            <a>Свадебные дуэты</a>
+            <a routerLink="/catalog/wedding-duets" [queryParams]="{ page: 1 }">Свадебные дуэты</a>
           </li>
           <li>
             <a routerLink="/custom">На заказ</a>

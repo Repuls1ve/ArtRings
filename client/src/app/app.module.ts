@@ -35,7 +35,8 @@ import { StudioComponent } from './views/studio/studio.component'
 import { WearingComponent } from './views/wearing/wearing.component';
 import { GiftComponent } from './views/gift/gift.component';
 import { GiftDecorationComponent } from './components/gift-decoration/gift-decoration.component';
-import { PrivacyComponent } from './views/privacy/privacy.component'
+import { PrivacyComponent } from './views/privacy/privacy.component';
+import { CatalogComponent } from './views/catalog/catalog.component'
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { PrivacyComponent } from './views/privacy/privacy.component'
     GiftComponent,
     GiftDecorationComponent,
     PrivacyComponent,
+    CatalogComponent,
   ],
   imports: [
     BrowserModule,

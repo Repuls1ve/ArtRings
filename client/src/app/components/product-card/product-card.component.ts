@@ -3,6 +3,9 @@ import { IProduct } from 'src/app/models/product.model'
 
 const mockProduct: IProduct = {
   _id: '',
+  category: 'wedding-rings',
+  inserts: true,
+  tags: [],
   reviews: [],
   discount: null,
   rating: 4,

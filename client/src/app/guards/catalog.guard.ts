@@ -11,7 +11,7 @@ export class CatalogGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean | UrlTree {
     const shouldRedirect = !AllowedCategories.includes(route.params['category']) || !Number(route.queryParams['page'])
     if (shouldRedirect) {
-      return this.router.parseUrl('/catalog/wedding?page=1')
+      return this.router.parseUrl('/catalog/wedding-rings?page=1')
     } else {
       return true
     }

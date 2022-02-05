@@ -3,6 +3,7 @@ import { ISliderImage } from '../components/slider/slider.component'
 export interface IProduct {
   _id: string
   identifier: string
+  category: IProductCategory
   description: string
   price: IProductPrice
   sizes: IProductSizes
@@ -12,10 +13,14 @@ export interface IProduct {
   production: number
   material: string
   rating: number
+  tags: string[]
+  inserts: boolean
   stock: boolean
 }
 
 export type IProductPrice = number
+
+export type IProductCategory = 'wedding-rings' | 'wedding-duets' | 'engagement-rings'
 
 export interface IProductSizes {
   male: number[]  
