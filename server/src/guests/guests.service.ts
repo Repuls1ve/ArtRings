@@ -278,10 +278,7 @@ export class GuestsService {
   }
 
   public isGuestExists(id: GuestDocument['id']): Observable<boolean> {
-    return from(this.guest.findById(id)).pipe(
-      map(guest => Boolean(guest)),
-      catchError(() => of(false))
-    )
+    return from(this.guest.exists({_id: id}))
   }
 
   public createGuest(): Observable<GuestDocument> {

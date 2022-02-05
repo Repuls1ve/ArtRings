@@ -1,5 +1,6 @@
 export interface IProduct {
   identifier: string
+  category: IProductCategory
   description: string
   price: IProductPrice
   sizes: IProductSizes
@@ -8,9 +9,13 @@ export interface IProduct {
   discount: IProductDiscount | null
   production: number
   material: string
+  tags: string[]
   rating: number
+  inserts: boolean
   stock: boolean
 }
+
+export type IProductCategory = 'wedding' | 'engagement' | 'duets' 
 
 export type IProductPrice = number
 

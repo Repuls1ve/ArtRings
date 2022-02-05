@@ -16,6 +16,12 @@ export class Product implements IProduct {
     type: String,
     required: true
   })
+  category: IProduct['category']
+
+  @Prop({
+    type: String,
+    required: true
+  })
   description: IProduct['description']
 
   @Prop({
@@ -43,6 +49,12 @@ export class Product implements IProduct {
   images: IProduct['images']
 
   @Prop({
+    type: [String],
+    default: []
+  })
+  tags: IProduct['tags']
+
+  @Prop({
     type: Object
   })
   discount: IProduct['discount']
@@ -64,6 +76,12 @@ export class Product implements IProduct {
     required: true
   })
   rating: IProduct['rating']
+
+  @Prop({
+    type: Boolean,
+    required: true
+  })
+  inserts: IProduct['inserts']
 
   @Prop({
     type: Boolean,
