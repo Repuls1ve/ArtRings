@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router'
+import { CatalogGuard } from '../guards/catalog.guard'
 import { AboutComponent } from '../views/about/about.component'
 import { CartComponent } from '../views/cart/cart.component'
+import { CatalogComponent } from '../views/catalog/catalog.component'
 import { ContactsComponent } from '../views/contacts/contacts.component'
 import { CustomComponent } from '../views/custom/custom.component'
 import { GiftComponent } from '../views/gift/gift.component'
@@ -13,57 +15,79 @@ import { StudioComponent } from '../views/studio/studio.component'
 import { WearingComponent } from '../views/wearing/wearing.component'
 import { WishlistComponent } from '../views/wishlist/wishlist.component'
 
+export enum RoutesPaths {
+  Home = '',
+  Custom = 'custom',
+  About = 'about',
+  Cart = 'cart',
+  Wishlist = 'wishlist',
+  Shipping = 'shipping',
+  Guarantees = 'guarantees',
+  Contacts = 'contacts',
+  Studio = 'studio',
+  Wearing = 'wearing',
+  Gift = 'gift',
+  Privacy = 'privacy',
+  Catalog = 'catalog',
+  NotFound = '**'
+}
+
 export const routes: Routes = [
   {
-    path: '',
+    path: RoutesPaths.Home,
     component: HomeComponent
   },
   {
-    path: 'custom',
+    path: RoutesPaths.Custom,
     component: CustomComponent
   },
   {
-    path: 'about',
+    path: RoutesPaths.About,
     component: AboutComponent
   },
   {
-    path: 'cart',
+    path: RoutesPaths.Cart,
     component: CartComponent
   },
   {
-    path: 'wishlist',
+    path: RoutesPaths.Wishlist,
     component: WishlistComponent
   },
   {
-    path: 'shipping',
+    path: RoutesPaths.Shipping,
     component: ShippingComponent
   },
   {
-    path: 'guarantees',
+    path: RoutesPaths.Guarantees,
     component: GuaranteesComponent
   },
   {
-    path: 'contacts',
+    path: RoutesPaths.Contacts,
     component: ContactsComponent
   },
   {
-    path: 'studio',
+    path: RoutesPaths.Studio,
     component: StudioComponent
   },
   {
-    path: 'wearing',
+    path: RoutesPaths.Wearing,
     component: WearingComponent
   },
   {
-    path: 'gift',
+    path: RoutesPaths.Gift,
     component: GiftComponent
   },
   {
-    path: 'privacy',
+    path: RoutesPaths.Privacy,
     component: PrivacyComponent
   },
   {
-    path: '**',
+    path: RoutesPaths.Catalog + '/:category',
+    component: CatalogComponent,
+    canActivate: [CatalogGuard]
+  },
+  {
+    path: RoutesPaths.NotFound,
     component: NotFoundComponent
   }
 ]
