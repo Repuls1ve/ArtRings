@@ -1,4 +1,11 @@
+import { IFilters } from '../interfaces/filters.interface'
 import { IProduct } from '../models/product.model'
+
+export interface IOption<T = any> {
+  id: number
+  label: string
+  value: T
+}
 
 type ICatalogDescriptions = {
   [key in IProduct['category']]: string
@@ -23,3 +30,124 @@ export const CatalogTitles: ICatalogTitles = {
   'wedding-duets': 'Свадебные дуэты',
   'engagement-rings': 'Помолвочные кольца'
 }
+
+export const CatalogTags: IFilters['tags'] = [
+  'этно', 'отпечатки', 'бесконечность', 'однотонные',
+  'эмаль', 'подвижные', 'необычные', 'широкие', 'косичка',
+  'комбинированные', 'узкие', 'растительный орнамент',
+  'брилланты', 'сапфиры'
+]
+
+export const CatalogSortOptions: IOption<IFilters['sorting']>[] = [
+  {
+    id: 1,
+    label: 'По умолчанию',
+    value: undefined
+  },
+  {
+    id: 2,
+    label: 'Рейтинг (начиная с высокого)',
+    value: {
+      attribute: 'rating',
+      order: 'desc'
+    }
+  },
+  {
+    id: 3,
+    label: 'Рейтинг (начиная с низкого)',
+    value: {
+      attribute: 'rating',
+      order: 'asc'
+    }
+  },
+  {
+    id: 4,
+    label: 'Цена (высокая > низкая)',
+    value: {
+      attribute: 'price',
+      order: 'desc'
+    }
+  },
+  {
+    id: 4,
+    label: 'Цена (низкая > высокая)',
+    value: {
+      attribute: 'price',
+      order: 'asc'
+    }
+  },
+  {
+    id: 5,
+    label: 'Название (А-Я)',
+    value: {
+      attribute: 'title',
+      order: 'desc'
+    }
+  },
+  {
+    id: 6,
+    label: 'Название (Я-А)',
+    value: {
+      attribute: 'title',
+      order: 'asc'
+    }
+  }
+]
+
+export const CatalogPricesOptions: IOption<IFilters['prices']>[] = [
+  {
+    id: 1,
+    label: 'все цены',
+    value: undefined
+  },
+  {
+    id: 2,
+    label: 'до 50 000',
+    value: {
+      start: 0,
+      end: 50000 
+    }
+  },
+  {
+    id: 3,
+    label: '50-70 000',
+    value: {
+      start: 50000,
+      end: 70000
+    }
+  },
+  {
+    id: 4,
+    label: '70-100 000',
+    value: {
+      start: 70000,
+      end: 100000
+    }
+  },
+  {
+    id: 5,
+    label: 'от 100 000',
+    value: {
+      start: 100000,
+      end: 1000000
+    }
+  }
+]
+
+export const CatalogInsertsOptions: IOption<IFilters['inserts']>[] = [
+  {
+    id: 1,
+    label: 'любые',
+    value: undefined
+  },
+  {
+    id: 2,
+    label: 'с камнями',
+    value: true
+  },
+  {
+    id: 3,
+    label: 'без камней',
+    value: false
+  }
+]
