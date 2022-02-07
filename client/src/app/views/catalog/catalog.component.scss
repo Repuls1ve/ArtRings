@@ -1,0 +1,82 @@
+@use "src/assets/scss/colors";
+@use "src/assets/scss/typography";
+@use "src/assets/scss/breakpoints";
+
+.catalog-section {
+  margin: 1rem 0 3rem;
+  padding: 0 8%;
+
+  .heading {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      text-transform: uppercase;
+      font-size: 1.625rem;
+      font-weight: typography.$semi-bold;
+      margin-bottom: 1rem;
+    }
+
+    .description {
+      max-width: 90%;
+      font-weight: typography.$light;
+      line-height: 150%;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      margin: 1rem 0 1.5rem;
+
+      .filter {
+        display: flex;
+
+        .label {
+          font-weight: typography.$light;
+          font-size: 0.875rem;
+        }
+
+        .select {
+          width: 100%;
+          color: colors.$color-secondary;
+          font-weight: typography.$semi-bold;
+          border: 0;
+        }
+      }
+
+      @include breakpoints.tablet {
+        justify-content: space-between;
+        gap: 1rem;
+      }
+    }
+
+    @include breakpoints.tablet {
+      width: 100%;
+    }
+  }
+
+  .catalog {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .product {
+      width: calc(33.33% - 0.67rem);
+
+      @include breakpoints.tablet {
+        width: calc(50% - 0.5rem);
+      }
+
+      @include breakpoints.new(550px) {
+        width: 100%;
+      }
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+  }
+}

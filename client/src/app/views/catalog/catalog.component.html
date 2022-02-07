@@ -1,0 +1,53 @@
+<section class="catalog-section" *ngIf="catalog$ | async as catalog">
+  <div class="heading">
+    <h2 class="title">{{ titles[category] }}</h2>
+    <p class="description">{{ descriptions[category] }}</p>
+    <div class="filters">
+      <div class="filter">
+        <label class="label" for="sorting">Сортировать:</label>
+        <select (change)="selectSorting($event)" name="sorting" class="select">
+          <option
+          *ngFor="let option of sortOptions"
+          [value]="option.key"
+          >{{ option.label }}</option>
+        </select>
+      </div>
+      <div class="filter">
+        <label class="label" for="inserts">Вставки:</label>
+        <select (change)="selectInserts($event)" name="inserts" class="select" id="inserts">
+          <option
+          *ngFor="let option of insertsOptions"
+          [value]="option.key"
+          >{{ option.label }}</option>
+        </select>
+      </div>
+      <div class="filter">
+        <label class="label" for="prices">Цена:</label>
+        <select (change)="selectPrices($event)" name="prices" class="select" id="prices">
+          <option
+          *ngFor="let option of priceOptions"
+          [value]="option.key"
+          >{{ option.label }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="catalog">
+    <div class="product" *ngFor="let product of catalog.data">
+      <app-product-card [product]="product"></app-product-card>
+    </div>
+    <div class="no-products" *ngIf="catalog.status == 'success' && catalog.meta.totalItems < 1">
+      No products
+    </div>
+  </div>
+  <div class="pagination" *ngIf="catalog.status == 'success'">
+    <app-pagination
+    *ngIf="catalog.meta.totalPages > 1"
+    [controlsName]="media.isActive('gt-xs')"
+    [totalItems]="catalog.meta.totalItems"
+    [pageSize]="catalog.meta.pageSize"
+    [page]="catalog.meta.currentPage"
+    (pageChange)="changePage($event)"
+    ></app-pagination>
+  </div>
+</section>

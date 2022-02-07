@@ -4,7 +4,7 @@ import { CatalogState } from './catalog.reducer'
 
 const catalogFeature = (state: AppState) => state.catalog
 
-export const selectProducts = createSelector(
+export const selectCatalog = createSelector(
   catalogFeature,
   (state: CatalogState) => state
 )

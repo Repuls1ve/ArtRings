@@ -20,6 +20,9 @@ export class PaginationComponent implements OnInit {
   @Input()
   public controlsName = true
 
+  @Input()
+  public page = 1
+
   @Output()
   public readonly pageChange = new EventEmitter<number>()
 
@@ -30,7 +33,7 @@ export class PaginationComponent implements OnInit {
 
   ngOnInit(): void {
     this.totalPages = Math.ceil(this.totalItems / this.pageSize)
-    this.selectPage(1)
+    this.selectPage(this.page)
   }
 
   public selectPage(page: number): void {

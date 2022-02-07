@@ -2,7 +2,7 @@ import { IFilters } from '../interfaces/filters.interface'
 import { IProduct } from '../models/product.model'
 
 export interface IOption<T = any> {
-  id: number
+  key: string
   label: string
   value: T
 }
@@ -40,12 +40,12 @@ export const CatalogTags: IFilters['tags'] = [
 
 export const CatalogSortOptions: IOption<IFilters['sorting']>[] = [
   {
-    id: 1,
+    key: 'default',
     label: 'По умолчанию',
     value: undefined
   },
   {
-    id: 2,
+    key: 'rating desc',
     label: 'Рейтинг (начиная с высокого)',
     value: {
       attribute: 'rating',
@@ -53,7 +53,7 @@ export const CatalogSortOptions: IOption<IFilters['sorting']>[] = [
     }
   },
   {
-    id: 3,
+    key: 'rating asc',
     label: 'Рейтинг (начиная с низкого)',
     value: {
       attribute: 'rating',
@@ -61,7 +61,7 @@ export const CatalogSortOptions: IOption<IFilters['sorting']>[] = [
     }
   },
   {
-    id: 4,
+    key: 'price desc',
     label: 'Цена (высокая > низкая)',
     value: {
       attribute: 'price',
@@ -69,7 +69,7 @@ export const CatalogSortOptions: IOption<IFilters['sorting']>[] = [
     }
   },
   {
-    id: 4,
+    key: 'price asc',
     label: 'Цена (низкая > высокая)',
     value: {
       attribute: 'price',
@@ -77,7 +77,7 @@ export const CatalogSortOptions: IOption<IFilters['sorting']>[] = [
     }
   },
   {
-    id: 5,
+    key: 'title desc',
     label: 'Название (А-Я)',
     value: {
       attribute: 'title',
@@ -85,7 +85,7 @@ export const CatalogSortOptions: IOption<IFilters['sorting']>[] = [
     }
   },
   {
-    id: 6,
+    key: 'title asc',
     label: 'Название (Я-А)',
     value: {
       attribute: 'title',
@@ -96,12 +96,12 @@ export const CatalogSortOptions: IOption<IFilters['sorting']>[] = [
 
 export const CatalogPricesOptions: IOption<IFilters['prices']>[] = [
   {
-    id: 1,
-    label: 'все цены',
+    key: 'all',
+    label: 'По умолчанию',
     value: undefined
   },
   {
-    id: 2,
+    key: 'lower 50 000',
     label: 'до 50 000',
     value: {
       start: 0,
@@ -109,7 +109,7 @@ export const CatalogPricesOptions: IOption<IFilters['prices']>[] = [
     }
   },
   {
-    id: 3,
+    key: 'from 50 000 to 70 000',
     label: '50-70 000',
     value: {
       start: 50000,
@@ -117,7 +117,7 @@ export const CatalogPricesOptions: IOption<IFilters['prices']>[] = [
     }
   },
   {
-    id: 4,
+    key: 'from 70 000 to 100 000',
     label: '70-100 000',
     value: {
       start: 70000,
@@ -125,7 +125,7 @@ export const CatalogPricesOptions: IOption<IFilters['prices']>[] = [
     }
   },
   {
-    id: 5,
+    key: 'from 100 000',
     label: 'от 100 000',
     value: {
       start: 100000,
@@ -136,17 +136,17 @@ export const CatalogPricesOptions: IOption<IFilters['prices']>[] = [
 
 export const CatalogInsertsOptions: IOption<IFilters['inserts']>[] = [
   {
-    id: 1,
-    label: 'любые',
+    key: 'all',
+    label: 'По умолчанию',
     value: undefined
   },
   {
-    id: 2,
+    key: 'with inserts',
     label: 'с камнями',
     value: true
   },
   {
-    id: 3,
+    key: 'without inserts',
     label: 'без камней',
     value: false
   }
