@@ -20,7 +20,7 @@ export class ProductsService {
     const { page, limit } = paginationQuery
     const findQuery = {
       ...(filters.prices && {'price': { '$gte': filters.prices.start, '$lte': filters.prices.end }}),
-      ...(filters.tags.length && {'tags': { '$in': filters.tags }}),
+      ...(filters.tags?.length && {'tags': { '$in': filters.tags }}),
       ...((filters.inserts !== undefined) && {'inserts': filters.inserts}),
       'category': filters.category
     }

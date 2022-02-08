@@ -2,7 +2,7 @@ import { IProduct } from 'src/products/interfaces/product.interface'
 
 export interface IFilters {
   sorting?: ISorting
-  category?: IProduct['category']
+  category: IProduct['category']
   prices?: IFilterPrices
   inserts?: IProduct['inserts']
   tags?: IProduct['tags']  

@@ -15,7 +15,7 @@ export interface IProduct {
   stock: boolean
 }
 
-export type IProductCategory = 'wedding' | 'engagement' | 'duets' 
+export type IProductCategory = 'wedding-rings' | 'wedding-duets' | 'engagement-rings'
 
 export type IProductPrice = number
 

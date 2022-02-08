@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, Query } from '@nestjs/common'
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Query } from '@nestjs/common'
 import { map, Observable } from 'rxjs'
 import { FiltersDto } from 'src/products/dtos/filters.dto'
 import { PaginationQueryDto } from 'src/common/dtos/pagination-query.dto'
@@ -26,6 +26,13 @@ export class ProductsController {
   @Post('add')
   public addProduct(@Body() addProductDto: AddProductDto): Observable<IResponse<ProductDocument>> {
     return this.products.addProduct(addProductDto).pipe(
+      map(data => ({data}))
+    )
+  }
+
+  @Get('one/:id')
+  public getProduct(@Param('id') id: ProductDocument['id']): Observable<IResponse<ProductDocument>> {
+    return this.products.getProduct(id).pipe(
       map(data => ({data}))
     )
   }
