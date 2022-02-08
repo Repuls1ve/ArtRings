@@ -3,19 +3,28 @@
 
 :host {
   width: 100%;
-  height: 100%;
+  height: 60px;
 }
 
-.button-primary {
+button {
   width: inherit;
   height: inherit;
   margin: inherit;
+}
+
+.button-primary {
   background-color: colors.$color-secondary;
   color: white;
   text-transform: uppercase;
-  font-size: 1rem;
-  font-weight: typography.$medium;
+  font-weight: typography.$semi-bold;
   outline: none;
   border: none;
-  border-radius: 1.5px;
+}
+
+.button-secondary {
+  background-color: white;
+  text-transform: uppercase;
+  color: colors.$color-secondary;
+  font-weight: typography.$semi-bold;
+  border: 1px solid colors.$color-secondary;
 }
