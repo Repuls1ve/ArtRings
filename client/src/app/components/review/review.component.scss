@@ -29,6 +29,8 @@
   .content {
     line-height: 130%;
     font-weight: typography.$medium;
+    overflow: auto;
+    height: 100%;
   }
 
   .date {
