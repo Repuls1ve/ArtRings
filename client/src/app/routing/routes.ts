@@ -10,6 +10,7 @@ import { GuaranteesComponent } from '../views/guarantees/guarantees.component'
 import { HomeComponent } from '../views/home/home.component'
 import { NotFoundComponent } from '../views/not-found/not-found.component'
 import { PrivacyComponent } from '../views/privacy/privacy.component'
+import { ProductComponent } from '../views/product/product.component'
 import { ShippingComponent } from '../views/shipping/shipping.component'
 import { StudioComponent } from '../views/studio/studio.component'
 import { WearingComponent } from '../views/wearing/wearing.component'
@@ -29,6 +30,7 @@ export enum RoutesPaths {
   Gift = 'gift',
   Privacy = 'privacy',
   Catalog = 'catalog',
+  Product = 'product',
   NotFound = '**'
 }
 
@@ -85,6 +87,10 @@ export const routes: Routes = [
     path: RoutesPaths.Catalog + '/:category',
     component: CatalogComponent,
     canActivate: [CatalogGuard]
+  },
+  {
+    path: RoutesPaths.Product + '/:id',
+    component: ProductComponent
   },
   {
     path: RoutesPaths.NotFound,

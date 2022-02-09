@@ -1,0 +1,139 @@
+<main class="container" *ngIf="product$ | async as product">
+  <ng-container *ngIf="product.status == 'success'">
+    <div class="heading">
+      <h2 class="identifier">Арт. {{ product.data.identifier }}</h2>
+      <div class="heading-group" *ngIf="media.isActive('gt-xs')">
+        <ng-container *ngTemplateOutlet="wishlistButton"></ng-container>
+        <ng-container *ngTemplateOutlet="ratingScale"></ng-container>
+      </div>
+      <div class="wishlist-mobile">
+        <ng-container *ngTemplateOutlet="wishlistButton"></ng-container>
+      </div>
+    </div>
+    <div class="content">
+      <hr class="hr heading-hr">
+      <div class="heading-group" *ngIf="media.isActive('lt-sm')">
+        <div class="wishlist-bottom">
+          <ng-container *ngTemplateOutlet="wishlistButton"></ng-container>
+        </div>
+        <ng-container *ngTemplateOutlet="ratingScale"></ng-container>
+      </div>
+      <div class="product">
+        <div class="photo-wrapper">
+          <img
+          class="photo"
+          *ngIf="product.data.images[0] as image"
+          [src]="image.source"
+          [alt]="image.alt"
+          >
+        </div>
+        <div class="info">
+          <span class="price">{{ product.data.price }} &#8381;</span>
+          <div class="sizes">
+            <div class="size">
+              <label for="female-sizes">Размер (жен.)</label>
+              <select id="female-sizes">
+                <option
+                *ngFor="let option of product.data.sizes['female']"
+                [value]="option"
+                >{{ option }}</option>
+              </select>
+            </div>
+            <div class="size">
+              <label for="male-sizes">Размер (муж.)</label>
+              <select id="male-sizes">
+                <option
+                *ngFor="let option of product.data.sizes['male']"
+                [value]="option"
+                >{{ option }}</option>
+              </select>
+            </div>
+          </div>
+          <app-button class="cart-button" text="в корзину"></app-button>
+          <app-button theme="secondary" text="написать whatsapp"></app-button>
+          <span class="samples">образцы этой модели представлены в студии</span>
+          <ul class="params-list">
+            <li *ngIf="product.data.inserts">Вставки</li>
+            <li>Срок изготовления: 14 рабочих дней</li>
+            <li>Материал: <span class="material">{{ product.data.material }}</span></li>
+          </ul>
+          <hr class="hr">
+          <span class="edits">Внесём любые правки в дизайн:</span>
+          <ul class="edits-list">
+            <li>ширина, толщина, камни (добавить, убрать, размер, цвет)</li>
+            <li>цвет колец (одноцветные, двухцветные)</li>
+            <li>поверхность (глянцевая, матовая, текстурированная и т.д.)</li>
+            <li>можно без гравировки эмблемы</li>
+            <li>возможно изготовление в другой пробе и из других драгоценных металлов</li>
+            <li>возможно нанести свою гравировку</li>
+          </ul>
+        </div>
+      </div>
+      <div class="details">
+        <ng-container *ngIf="media.isActive('gt-xs')">
+          <div class="branches">
+            <div class="branch">
+              <button
+              [class.active]="branch == 'description'"
+              (click)="setBranch('description')"
+              class="branch-button"
+              >Описание</button>  
+            </div>
+            <div class="branch">
+              <button
+              [class.active]="branch == 'reviews'"
+              (click)="setBranch('reviews')"
+              class="branch-button"
+              >Отзывы ({{ product.data.reviews.length }})</button>
+            </div>
+          </div>
+          <hr class="hr">
+          <div class="branch-content">
+            <div class="descriptions" *ngIf="branch == 'description'">
+              <ng-container *ngTemplateOutlet="descriptions"></ng-container>
+            </div>
+            <div class="reviews-carousel" *ngIf="branch == 'reviews'">
+              <app-carousel [scrollbar]="false">
+                <app-carousel-item *ngFor="let i of [].constructor(4)">
+                  <app-review></app-review>
+                </app-carousel-item>
+              </app-carousel>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="media.isActive('lt-sm')">
+          <h3 class="detail-title">Описание</h3>
+          <div class="descriptions">
+            <ng-container *ngTemplateOutlet="descriptions"></ng-container>
+          </div>
+          <h3 class="detail-title">Отзывы ({{ product.data.reviews.length }})</h3> 
+          <div class="reviews">
+            <app-review class="review-wrapper" *ngFor="let i of [1, 2, 3]"></app-review>
+          </div>
+        </ng-container>
+        <ng-template #descriptions>
+          <p>Прекрасные обручальные кольца с инкрустацией дорожками бриллиантов в женском кольце.</p>
+          <p>Это замечательный образец современной классики. Бриллианты в кольце расположены под углом к шинке. Камни при столь необычном расположении сияют по-особенному. Их блеск заметен лучше всего когда рука находится в движении.</p>
+          <p>Мужское кольцо без инкрустации, оно более строгое. Скосы шинки имеют другую, матированную, фактуру. В целом дизайн этих парных колец очень изысканный и современный.</p>
+          <p>Такие кольца обязательно понравятся тем, кто ищет что-то классическое и в то же время особенное, не такое, как у всех!</p>
+        </ng-template>
+      </div>
+    </div>
+    <ng-template #wishlistButton>
+      <button class="wishlist">
+        <img
+        src="/assets/svg/heart.svg"
+        class="favourite-icon"
+        alt="favourite"
+        >
+        в избранное
+      </button>
+    </ng-template>
+    <ng-template #ratingScale>
+      <div class="rating">
+        <app-rating class="scale" [rating]="product.data.rating"></app-rating>
+        <span class="count">{{ product.data.reviews.length }} отзывов</span>
+      </div>
+    </ng-template>
+  </ng-container>
+</main>
