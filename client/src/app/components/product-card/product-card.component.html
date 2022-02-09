@@ -9,20 +9,23 @@
       ></app-rating>
     </div>
   </div>
-  <div class="image-wrapper">
+  <button class="image-wrapper-button" (click)="onClick()">
     <img
     *ngIf="product.images[0] as image"
     [src]="image.source"
     [alt]="image.alt"
     >
-  </div>
+  </button>
   <div class="row">
-    <img
-    src="/assets/svg/heart.svg"
-    [style.height.px]="favouriteHeight"
-    class="favourite-icon"
-    alt="favourite"
-    >
+    <button class="wishlist-button">
+      <img
+      src="/assets/svg/heart.svg"
+      (click)="onWishedClick()"
+      [style.height.px]="favouriteHeight"
+      class="favourite-icon"
+      alt="favourite"
+      >
+    </button>
     <span
     [style.fontSize.px]="priceFontSize"
     class="price">

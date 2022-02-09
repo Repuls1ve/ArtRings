@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { IProduct } from 'src/app/models/product.model'
 
 const mockProduct: IProduct = {
@@ -48,8 +48,22 @@ export class ProductCardComponent {
   public ratingHeight = 18
 
   @Input('favourite.height.px')
-  public favouriteHeight = 22
+  public favouriteHeight = 18
 
   @Input('price.fontSize.px')
   public priceFontSize = 16
+
+  @Output('clicked')
+  public readonly photoClick = new EventEmitter<IProduct>()
+
+  @Output('wished')
+  public readonly wishedClick = new EventEmitter<IProduct>()
+
+  public onClick(): void {
+    this.photoClick.emit(this.product)
+  }
+
+  public onWishedClick(): void {
+    this.wishedClick.emit(this.product)
+  }
 }
