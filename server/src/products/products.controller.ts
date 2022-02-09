@@ -7,6 +7,7 @@ import { IPagination } from 'src/common/interfaces/pagination.interface'
 import { AddProductDto } from './dtos/add-product.dto'
 import { ProductsService } from './products.service'
 import { ProductDocument } from './schemas/product.schema'
+import { GetProductDto } from './dtos/get-product.dto'
 
 @Controller('products')
 export class ProductsController {
@@ -31,8 +32,8 @@ export class ProductsController {
   }
 
   @Get('one/:id')
-  public getProduct(@Param('id') id: ProductDocument['id']): Observable<IResponse<ProductDocument>> {
-    return this.products.getProduct(id).pipe(
+  public getProduct(@Param() getProductDto: GetProductDto): Observable<IResponse<ProductDocument>> {
+    return this.products.getProduct(getProductDto.id).pipe(
       map(data => ({data}))
     )
   }
