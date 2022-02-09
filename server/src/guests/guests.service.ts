@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Types, Model, QueryOptions, UpdateQuery, Document, FilterQuery } from 'mongoose'
-import { catchError, from, map, Observable, of, switchMap } from 'rxjs'
+import { from, map, Observable, of, switchMap } from 'rxjs'
 import { ProductsService } from 'src/products/products.service'
 import { ProductDocument } from 'src/products/schemas/product.schema'
 import { UpdateGuestDto } from './dtos/update-guest.dto'
@@ -177,20 +177,27 @@ export class GuestsService {
     id: GuestDocument['id'],
     updateGuestDto: UpdateGuestDto
   ): Observable<Pick<IGuest, 'wishlist' | 'metrics'>> {
-    return from(this.products.getProduct(updateGuestDto.productId)).pipe(
-      switchMap(product => {
-        const queryOptions: QueryOptions = { new: true }
-        const updateQuery: UpdateQuery<GuestDocument> = {
-          $push: { 'wishlist.items': product}
-        }
+    const { productId } = updateGuestDto
 
-        return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
-          map(guest => ({
-            wishlist: guest.wishlist,
-            metrics: this.getMetrics(guest)
-          }))
-        )
-      })
+    return from(this.products.getProduct(updateGuestDto.productId)).pipe(
+      switchMap(product => from(this.guest.findById(id)).pipe(
+        switchMap(guest => {
+          const isAlreadyWished = guest.wishlist.items.some(product => 
+            String(product['_id']) === productId
+          )
+          const queryOptions: QueryOptions = { new: true }
+          const updateQuery: UpdateQuery<GuestDocument> = {
+            ...(!isAlreadyWished && { $push: { 'wishlist.items': product} })
+          }
+
+          return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
+            map(guest => ({
+              wishlist: guest.wishlist,
+              metrics: this.getMetrics(guest)
+            }))
+          )
+        })
+      ))
     )
   }
 
