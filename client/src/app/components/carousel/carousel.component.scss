@@ -34,6 +34,12 @@
       &::-webkit-scrollbar-thumb {
         background-color: colors.$color-secondary;
       }
+
+      &.no-scrollbar::-webkit-scrollbar {
+        display: none;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
     }
 
     .carousel-toggler {

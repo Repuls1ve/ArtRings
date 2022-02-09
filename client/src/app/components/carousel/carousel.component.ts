@@ -1,4 +1,4 @@
-import { Component, ContentChildren, QueryList } from '@angular/core'
+import { Component, ContentChildren, Input, QueryList } from '@angular/core'
 import { CarouselItemComponent } from '../carousel-item/carousel-item.component'
 
 @Component({
@@ -9,6 +9,9 @@ import { CarouselItemComponent } from '../carousel-item/carousel-item.component'
 export class CarouselComponent {
   @ContentChildren(CarouselItemComponent)
   public items!: QueryList<CarouselItemComponent>
+
+  @Input()
+  public scrollbar = true
 
   public toNext(): void {
     const visibles = this.visibleElements()

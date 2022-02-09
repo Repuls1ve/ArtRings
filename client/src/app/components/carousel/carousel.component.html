@@ -7,7 +7,7 @@
       alt="previous"
       >
     </button>
-    <div class="carousel-items">
+    <div class="carousel-items" [class.no-scrollbar]="!scrollbar">
       <ng-content></ng-content>
     </div>
     <button class="carousel-toggler" [disabled]="items.last.visible" (click)="toNext()">

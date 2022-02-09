@@ -1,0 +1,39 @@
+@use "src/assets/scss/typography";
+@use "src/assets/scss/breakpoints";
+@use "src/assets/scss/colors";
+
+:host {
+  width: 430px;
+  height: 360px;
+}
+
+.review {
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  height: inherit;
+  background-color: colors.$color-fourtry;
+
+  .author {
+    font-weight: typography.$semi-bold;
+    font-style: normal;
+  }
+
+  .rating {
+    margin-top: 0.25rem;
+    margin-bottom: 2rem;
+    height: 16px;
+  }
+
+  .content {
+    line-height: 130%;
+    font-weight: typography.$medium;
+  }
+
+  .date {
+    margin-top: auto;
+    font-size: 0.75rem;
+    color: rgba($color: black, $alpha: 0.5);
+  }
+}
