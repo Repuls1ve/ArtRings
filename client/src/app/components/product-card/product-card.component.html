@@ -16,13 +16,14 @@
     [alt]="image.alt"
     >
   </button>
-  <div class="row">
+  <div class="row" *ngIf="wishlist$ | async as wishlist">
     <button class="wishlist-button">
       <img
       src="/assets/svg/heart.svg"
-      (click)="onWishedClick()"
+      (click)="onWishedClick(wishlist)"
       [style.height.px]="favouriteHeight"
       class="favourite-icon"
+      [class.wished]="isWished(wishlist)"
       alt="favourite"
       >
     </button>

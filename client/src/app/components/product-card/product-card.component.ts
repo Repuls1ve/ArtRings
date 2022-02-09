@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Store } from '@ngrx/store'
 import { IProduct } from 'src/app/models/product.model'
+import { AppState } from 'src/app/store/app.state'
+import { addWished, removeWished } from 'src/app/store/wishlist/wishlist.actions'
+import { selectWishlist } from 'src/app/store/wishlist/wishlist.selectors'
 
 const mockProduct: IProduct = {
   _id: '',
@@ -41,6 +45,8 @@ const mockProduct: IProduct = {
   styleUrls: ['./product-card.component.scss']
 })
 export class ProductCardComponent {
+  public wishlist$ = this.store.select(selectWishlist)
+
   @Input()
   public product: IProduct = mockProduct
 
@@ -53,17 +59,22 @@ export class ProductCardComponent {
   @Input('price.fontSize.px')
   public priceFontSize = 16
 
-  @Output('clicked')
-  public readonly photoClick = new EventEmitter<IProduct>()
+  @Output()
+  public readonly clicked = new EventEmitter<IProduct>()
 
-  @Output('wished')
-  public readonly wishedClick = new EventEmitter<IProduct>()
+  constructor(private readonly store: Store<AppState>) {}
 
   public onClick(): void {
-    this.photoClick.emit(this.product)
+    this.clicked.emit(this.product)
   }
 
-  public onWishedClick(): void {
-    this.wishedClick.emit(this.product)
+  public onWishedClick(wishlist: AppState['wishlist']): void {
+    this.isWished(wishlist) ?
+    this.store.dispatch(removeWished({data: this.product._id})) :
+    this.store.dispatch(addWished({data: this.product._id}))
+  }
+
+  public isWished(wishlist: AppState['wishlist']): boolean {
+    return wishlist.data.items?.some(product => product._id === this.product._id)
   }
 }

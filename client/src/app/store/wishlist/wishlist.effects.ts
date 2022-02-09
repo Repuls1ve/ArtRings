@@ -35,7 +35,7 @@ export class WishlistEffects {
 
   public removeWished$ = createEffect(() => this.actions$.pipe(
     ofType(removeWished),
-    switchMap(payload => this.wishlistService.addWished(payload.data).pipe(
+    switchMap(payload => this.wishlistService.removeWished(payload.data).pipe(
       map(data => removeWishedSuccess({data})),
       catchError(error => of(removeWishedFailure({error: error.message})))
     ))

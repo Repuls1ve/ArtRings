@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store'
 import { AppState } from './store/app.state'
 import { identifyGuest } from './store/guest/guest.actions'
 import { loadViewed } from './store/viewed/viewed.actions'
+import { loadWishlist } from './store/wishlist/wishlist.actions'
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.store.dispatch(identifyGuest())
+    this.store.dispatch(loadWishlist())
     this.store.dispatch(loadViewed())
   }
 }

@@ -11,7 +11,8 @@ import { RoutesPaths } from 'src/app/routing/routes'
 import { AppState } from 'src/app/store/app.state'
 import { loadProducts } from 'src/app/store/catalog/catalog.actions'
 import { selectCatalog } from 'src/app/store/catalog/catalog.selectors'
-import { addWished } from 'src/app/store/wishlist/wishlist.actions'
+import { addWished, removeWished } from 'src/app/store/wishlist/wishlist.actions'
+import { selectWishlist } from 'src/app/store/wishlist/wishlist.selectors'
 
 @Component({
   selector: 'app-catalog',
@@ -28,7 +29,7 @@ export class CatalogComponent implements OnInit {
   public readonly sortOptions = CatalogSortOptions
   public readonly priceOptions = CatalogPricesOptions
   public readonly insertsOptions = CatalogInsertsOptions
-  
+
   public inserts: IFilters['inserts'] = this.insertsOptions[0].value
   public sorting: IFilters['sorting'] = this.sortOptions[0].value
   public prices: IFilters['prices'] = this.priceOptions[0].value
@@ -74,15 +75,11 @@ export class CatalogComponent implements OnInit {
       [], {
         relativeTo: this.route,
         queryParams: queryParams
-      });
+    })
   }
 
   public onProductClick(id: IProduct['_id']): void {
     this.router.navigate([`/${RoutesPaths.Product}/${id}`])
-  }
-
-  public onProductWished(id: IProduct['_id']): void {
-    this.store.dispatch(addWished({data: id}))
   }
 
   private updateProducts(): void {

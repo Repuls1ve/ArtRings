@@ -37,7 +37,6 @@
       <app-product-card
       [product]="product"
       (clicked)="onProductClick(product._id)"
-      (wished)="onProductWished(product._id)"
       ></app-product-card>
     </div>
     <div class="no-products" *ngIf="catalog.status == 'success' && catalog.meta.totalItems < 1">
