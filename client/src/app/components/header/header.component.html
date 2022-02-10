@@ -69,22 +69,28 @@
       <nav class="extra-links-wrapper">
         <ul class="extra-links">
           <li>
-            <a routerLink="/cart">
-              <img
-              src="/assets/svg/shopping-cart.svg"
-              class="cart-icon"
-              alt="cart"
-              >
-            </a>
+            <ng-container *ngrxLet="cartQty$ as cartQty">
+              <a routerLink="/cart" class="cart-link">
+                <img
+                src="/assets/svg/shopping-cart.svg"
+                class="cart-icon"
+                alt="cart"
+                >
+                <span class="count" *ngIf="cartQty">{{ cartQty }}</span>
+              </a>
+            </ng-container>
           </li>
           <li>
-            <a routerLink="/wishlist">
-              <img
-              src="/assets/svg/heart.svg"
-              class="favourites-icon"
-              alt="favourites"
-              >
-            </a>
+            <ng-container *ngrxLet="wishlistQty$ as wishlistQty">
+              <a routerLink="/wishlist" class="wishlist-link">
+                <img
+                src="/assets/svg/heart.svg"
+                class="favourites-icon"
+                alt="favourites"
+                >
+                <span class="count" *ngIf="wishlistQty">{{ wishlistQty }}</span>
+              </a>
+            </ng-container>
           </li>
         </ul>
       </nav>
