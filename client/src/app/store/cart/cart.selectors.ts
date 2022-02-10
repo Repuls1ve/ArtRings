@@ -8,3 +8,8 @@ export const selectCart = createSelector(
   cartFeature,
   (state: CartState) => state
 )
+
+export const selectCartQuantity = createSelector(
+  cartFeature,
+  (state: CartState) => state.data.items?.length || 0
+)

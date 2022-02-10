@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment'
 import { EffectsModule } from '@ngrx/effects'
 import { AppEffects } from './app.effects'
 import { AppReducers } from './app.reducers'
+import { ReactiveComponentModule } from '@ngrx/component'
 
 @NgModule({
   declarations: [],
@@ -21,6 +22,7 @@ import { AppReducers } from './app.reducers'
   exports: [
     StoreModule,
     StoreDevtoolsModule,
+    ReactiveComponentModule,
     EffectsModule
   ]
 })
