@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, Input } from '@angular/core'
+import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { IProduct } from 'src/app/models/product.model'
+import { RoutesPaths } from 'src/app/routing/routes'
 import { AppState } from 'src/app/store/app.state'
 import { addWished, removeWished } from 'src/app/store/wishlist/wishlist.actions'
 import { selectWishlist } from 'src/app/store/wishlist/wishlist.selectors'
@@ -14,7 +16,7 @@ const mockProduct: IProduct = {
   discount: null,
   rating: 4,
   identifier: '019',
-  description: '',
+  descriptions: [''],
   material: '',
   price: 56900,
   production: 0,
@@ -59,19 +61,19 @@ export class ProductCardComponent {
   @Input('price.fontSize.px')
   public priceFontSize = 16
 
-  @Output()
-  public readonly clicked = new EventEmitter<IProduct>()
-
-  constructor(private readonly store: Store<AppState>) {}
-
-  public onClick(): void {
-    this.clicked.emit(this.product)
-  }
+  constructor(
+    private readonly store: Store<AppState>,
+    private readonly router: Router
+  ) {}
 
   public onWishedClick(wishlist: AppState['wishlist']): void {
     this.isWished(wishlist) ?
     this.store.dispatch(removeWished({data: this.product._id})) :
     this.store.dispatch(addWished({data: this.product._id}))
+  }
+
+  public onProductClick(): void {
+    this.router.navigate([`/${RoutesPaths.Product}/${this.product._id}`])
   }
 
   public isWished(wishlist: AppState['wishlist']): boolean {

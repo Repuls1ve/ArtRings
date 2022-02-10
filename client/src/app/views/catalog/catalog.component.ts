@@ -6,13 +6,9 @@ import { combineLatest } from 'rxjs'
 import { CatalogDescriptions, CatalogInsertsOptions, CatalogPricesOptions, CatalogSortOptions, CatalogTags, CatalogTitles } from 'src/app/constants/catalog.constant'
 import { IFilters } from 'src/app/interfaces/filters.interface'
 import { IPaginationQuery } from 'src/app/interfaces/pagination.interface'
-import { IProduct } from 'src/app/models/product.model'
-import { RoutesPaths } from 'src/app/routing/routes'
 import { AppState } from 'src/app/store/app.state'
 import { loadProducts } from 'src/app/store/catalog/catalog.actions'
 import { selectCatalog } from 'src/app/store/catalog/catalog.selectors'
-import { addWished, removeWished } from 'src/app/store/wishlist/wishlist.actions'
-import { selectWishlist } from 'src/app/store/wishlist/wishlist.selectors'
 
 @Component({
   selector: 'app-catalog',
@@ -76,10 +72,6 @@ export class CatalogComponent implements OnInit {
         relativeTo: this.route,
         queryParams: queryParams
     })
-  }
-
-  public onProductClick(id: IProduct['_id']): void {
-    this.router.navigate([`/${RoutesPaths.Product}/${id}`])
   }
 
   private updateProducts(): void {

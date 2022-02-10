@@ -59,11 +59,16 @@
   .catalog {
     margin-bottom: 1.5rem;
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 1rem;
 
     .product {
-      width: calc(33.33% - 0.67rem);
+      width: 26%;
+      margin-bottom: 1.5rem;
+
+      @include breakpoints.new(1400px) {
+        width: calc(33.33% - 0.67rem);
+      }
 
       @include breakpoints.tablet {
         width: calc(50% - 0.5rem);
@@ -72,6 +77,11 @@
       @include breakpoints.new(550px) {
         width: 100%;
       }
+    }
+
+    @include breakpoints.new(1400px) {
+      justify-content: flex-start;
+      gap: 1rem;
     }
   }
 

@@ -9,7 +9,7 @@
       ></app-rating>
     </div>
   </div>
-  <button class="image-wrapper-button" (click)="onClick()">
+  <button class="image-wrapper-button" (click)="onProductClick()">
     <img
     *ngIf="product.images[0] as image"
     [src]="image.source"

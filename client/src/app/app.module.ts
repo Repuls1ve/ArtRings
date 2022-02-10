@@ -36,8 +36,8 @@ import { WearingComponent } from './views/wearing/wearing.component'
 import { GiftComponent } from './views/gift/gift.component'
 import { GiftDecorationComponent } from './components/gift-decoration/gift-decoration.component'
 import { PrivacyComponent } from './views/privacy/privacy.component'
-import { CatalogComponent } from './views/catalog/catalog.component';
-import { ProductComponent } from './views/product/product.component';
+import { CatalogComponent } from './views/catalog/catalog.component'
+import { ProductComponent } from './views/product/product.component'
 import { ReviewComponent } from './components/review/review.component'
 
 @NgModule({

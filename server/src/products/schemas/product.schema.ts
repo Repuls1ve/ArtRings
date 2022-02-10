@@ -19,10 +19,10 @@ export class Product implements IProduct {
   category: IProduct['category']
 
   @Prop({
-    type: String,
+    type: [String],
     required: true
   })
-  description: IProduct['description']
+  descriptions: IProduct['descriptions']
 
   @Prop({
     type: Object,
@@ -60,7 +60,7 @@ export class Product implements IProduct {
   discount: IProduct['discount']
 
   @Prop({
-    type: Date,
+    type: Number,
     required: true
   })
   production: IProduct['production']

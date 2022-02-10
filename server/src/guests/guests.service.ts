@@ -236,20 +236,27 @@ export class GuestsService {
     id: GuestDocument['id'],
     updateGuestDto: UpdateGuestDto
   ): Observable<Pick<IGuest, 'viewed' | 'metrics'>> {
-    return from(this.products.getProduct(updateGuestDto.productId)).pipe(
-      switchMap(product => {
-        const queryOptions: QueryOptions = { new: true }
-        const updateQuery: UpdateQuery<GuestDocument> = {
-          $push: { 'viewed.items': product}
-        }
+    const { productId } = updateGuestDto
 
-        return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
-          map(guest => ({
-            viewed: guest.viewed,
-            metrics: this.getMetrics(guest)
-          }))
-        )
-      })
+    return from(this.products.getProduct(updateGuestDto.productId)).pipe(
+      switchMap(product => from(this.guest.findById(id)).pipe(
+        switchMap(guest => {
+          const isAlreadyViewed = guest.viewed.items.some(product => 
+            String(product['_id']) === productId
+          )
+          const queryOptions: QueryOptions = { new: true }
+          const updateQuery: UpdateQuery<GuestDocument> = {
+            ...(!isAlreadyViewed && { $push: { 'viewed.items': product} })
+          }
+
+          return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
+            map(guest => ({
+              viewed: guest.viewed,
+              metrics: this.getMetrics(guest)
+            }))
+          )
+        })
+      ))
     )
   }
 

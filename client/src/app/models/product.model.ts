@@ -4,7 +4,7 @@ export interface IProduct {
   _id: string
   identifier: string
   category: IProductCategory
-  description: string
+  descriptions: string[]
   price: IProductPrice
   sizes: IProductSizes
   reviews: IProductReview[]

@@ -11,8 +11,8 @@ import { selectWishlistQuantity } from 'src/app/store/wishlist/wishlist.selector
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  public wishlistQty$ = this.store.select(selectWishlistQuantity)
-  public cartQty$ = this.store.select(selectCartQuantity)
+  public readonly wishlistQty$ = this.store.select(selectWishlistQuantity)
+  public readonly cartQty$ = this.store.select(selectCartQuantity)
   public navbarClosed = true
 
   constructor(
