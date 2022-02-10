@@ -50,6 +50,11 @@
       margin-right: 0.5rem;
       filter: brightness(0) saturate(100%) invert(77%) sepia(10%) saturate(533%)
         hue-rotate(171deg) brightness(91%) contrast(85%);
+
+      &.wished {
+        filter: brightness(0) saturate(100%) invert(29%) sepia(9%)
+          saturate(7418%) hue-rotate(207deg) brightness(91%) contrast(109%);
+      }
     }
   }
 
@@ -292,6 +297,27 @@
           width: 100%;
         }
       }
+    }
+  }
+}
+
+.viewed {
+  margin: 1rem 0 3rem;
+  padding: 0 8%;
+
+  .title {
+    text-align: center;
+    font-size: 1.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+  }
+
+  .viewed-carousel {
+    width: 100%;
+
+    .viewed-item {
+      width: 315px;
     }
   }
 }

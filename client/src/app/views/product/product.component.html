@@ -94,8 +94,8 @@
             </div>
             <div class="reviews-carousel" *ngIf="branch == 'reviews'">
               <app-carousel [scrollbar]="false">
-                <app-carousel-item *ngFor="let i of [].constructor(4)">
-                  <app-review></app-review>
+                <app-carousel-item *ngFor="let review of product.data.reviews">
+                  <app-review [review]="review"></app-review>
                 </app-carousel-item>
               </app-carousel>
             </div>
@@ -108,26 +108,32 @@
           </div>
           <h3 class="detail-title">Отзывы ({{ product.data.reviews.length }})</h3> 
           <div class="reviews">
-            <app-review class="review-wrapper" *ngFor="let i of [1, 2, 3]"></app-review>
+            <app-review
+            class="review-wrapper"
+            [review]="review"
+            *ngFor="let review of product.data.reviews"
+            ></app-review>
           </div>
         </ng-container>
         <ng-template #descriptions>
-          <p>Прекрасные обручальные кольца с инкрустацией дорожками бриллиантов в женском кольце.</p>
-          <p>Это замечательный образец современной классики. Бриллианты в кольце расположены под углом к шинке. Камни при столь необычном расположении сияют по-особенному. Их блеск заметен лучше всего когда рука находится в движении.</p>
-          <p>Мужское кольцо без инкрустации, оно более строгое. Скосы шинки имеют другую, матированную, фактуру. В целом дизайн этих парных колец очень изысканный и современный.</p>
-          <p>Такие кольца обязательно понравятся тем, кто ищет что-то классическое и в то же время особенное, не такое, как у всех!</p>
+          <p *ngFor="let description of product.data.descriptions">{{ description }}</p>
         </ng-template>
       </div>
     </div>
     <ng-template #wishlistButton>
-      <button class="wishlist">
-        <img
-        src="/assets/svg/heart.svg"
-        class="favourite-icon"
-        alt="favourite"
-        >
-        в избранное
-      </button>
+      <ng-container *ngrxLet="wishlist$ as wishlist">
+        <ng-container *ngIf="wishlist.status == 'success'">
+          <button class="wishlist" *ngIf="product.data._id as id" (click)="onWishedClick(wishlist, id)">
+            <img
+            src="/assets/svg/heart.svg"
+            class="favourite-icon"
+            [class.wished]="isWished(wishlist, id)"
+            alt="favourite"
+            >
+            {{ isWished(wishlist, id) ? 'в избранном' : 'в избранное'}}
+          </button>
+        </ng-container>
+      </ng-container>
     </ng-template>
     <ng-template #ratingScale>
       <div class="rating">
@@ -137,3 +143,13 @@
     </ng-template>
   </ng-container>
 </main>
+<ng-container *ngrxLet="viewed$ as viewed">
+  <section class="viewed" *ngIf="viewed.data.items?.length">
+      <h3 class="title">Недавно просмотренные</h3>
+      <app-carousel class="viewed-carousel">
+        <app-carousel-item class="viewed-item" *ngFor="let product of viewed.data.items?.slice(-10)">
+          <app-product-card [product]="product"></app-product-card>
+        </app-carousel-item>
+      </app-carousel>
+  </section>
+</ng-container>
