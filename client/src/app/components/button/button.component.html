@@ -2,7 +2,9 @@
 [type]="buttonType"
 [class.button-secondary]="theme == 'secondary'"
 [class.button-primary]="theme == 'primary'"
+[class.loading]="isLoading"
+[disabled]="isLoading"
 (click)="handleClick()"
 >
-  {{ text }}
+  {{ isLoading ? '' : text }}
 </button>

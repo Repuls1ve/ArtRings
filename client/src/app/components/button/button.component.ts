@@ -17,11 +17,14 @@ export class ButtonComponent {
 
   @Input()
   public text = ''
+
+  @Input()
+  public isLoading = false
  
   @Output()
-  public readonly click = new EventEmitter()
+  public readonly clicked = new EventEmitter()
 
   public handleClick(): void {
-    this.click.emit()
+    this.clicked.emit()
   }
 }
