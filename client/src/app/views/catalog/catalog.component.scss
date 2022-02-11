@@ -65,9 +65,15 @@
     .product {
       width: 26%;
       margin-bottom: 1.5rem;
+      height: 400px;
 
       @include breakpoints.new(1400px) {
         width: calc(33.33% - 0.67rem);
+        margin-bottom: 0;
+      }
+
+      @include breakpoints.new(1100px) {
+        height: 325px;
       }
 
       @include breakpoints.tablet {

@@ -6,6 +6,7 @@ import { AppRoutingModule } from './routing/app-routing.module'
 import { AppComponent } from './app.component'
 import { FooterComponent } from './components/footer/footer.component'
 import { FlexLayoutModule } from '@angular/flex-layout'
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader'
 import { HeaderComponent } from './components/header/header.component'
 import { TopBarComponent } from './components/top-bar/top-bar.component'
 import { SocialMediaComponent } from './components/social-media/social-media.component'
@@ -78,6 +79,7 @@ import { ReviewComponent } from './components/review/review.component'
     BrowserModule,
     FlexLayoutModule,
     HttpClientModule,
+    NgxSkeletonLoaderModule,
     AgmCoreModule.forRoot({apiKey: environment.GMApiKey}),
     AppRoutingModule,
     AppStoreModule
