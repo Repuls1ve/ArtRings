@@ -51,16 +51,19 @@ export class CatalogComponent implements OnInit {
 
   public selectPrices(event: any): void {
     this.prices = this.priceOptions.find(option => option.key === event.target.value)?.value
+    this.changePage(1)
     this.updateProducts()
   }
 
   public selectSorting(event: any): void {
     this.sorting = this.sortOptions.find(option => option.key === event.target.value)?.value
+    this.changePage(1)
     this.updateProducts()
   }
 
   public selectInserts(event: any): void {
     this.inserts = this.insertsOptions.find(option => option.key === event.target.value)?.value
+    this.changePage(1)
     this.updateProducts()
   }
 

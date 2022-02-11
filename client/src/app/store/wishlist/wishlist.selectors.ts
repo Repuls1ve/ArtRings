@@ -8,8 +8,3 @@ export const selectWishlist = createSelector(
   wishlistFeature,
   (state: WishlistState) => state
 )
-
-export const selectWishlistQuantity = createSelector(
-  wishlistFeature,
-  (state: WishlistState) => state.data.items?.length || 0
-)

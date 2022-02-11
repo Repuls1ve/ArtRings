@@ -49,8 +49,18 @@
               </select>
             </div>
           </div>
-          <app-button class="cart-button" text="в корзину"></app-button>
-          <app-button theme="secondary" text="написать whatsapp"></app-button>
+          <ng-container *ngrxLet="cart$ as cart">
+            <app-button
+            [isLoading]="cart.status == 'loading'"
+            class="cart-button"
+            (clicked)="onCartClick(product.data._id)"
+            text="в корзину"
+            ></app-button>
+            <app-button
+            theme="secondary"
+            text="написать whatsapp"
+            ></app-button>
+          </ng-container>
           <span class="samples">образцы этой модели представлены в студии</span>
           <ul class="params-list">
             <li *ngIf="product.data.inserts">Вставки</li>

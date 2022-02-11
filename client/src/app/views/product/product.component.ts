@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { IProduct } from 'src/app/models/product.model'
 import { AppState } from 'src/app/store/app.state'
+import { addProduct, removeProduct } from 'src/app/store/cart/cart.actions'
+import { selectCart } from 'src/app/store/cart/cart.selectors'
 import { loadProduct } from 'src/app/store/product/product.actions'
 import { selectProduct } from 'src/app/store/product/product.selectors'
 import { addViewed } from 'src/app/store/viewed/viewed.actions'
@@ -22,6 +24,7 @@ export class ProductComponent implements OnInit {
   public readonly wishlist$ = this.store.select(selectWishlist)
   public readonly product$ = this.store.select(selectProduct)
   public readonly viewed$ = this.store.select(selectViewed)
+  public readonly cart$ = this.store.select(selectCart)
   public branch: branch = 'description'
 
   constructor(
@@ -39,6 +42,10 @@ export class ProductComponent implements OnInit {
 
   public setBranch(branch: branch): void {
     this.branch = branch
+  }
+
+  public onCartClick(id: IProduct['_id']): void {
+    this.store.dispatch(addProduct({data: id}))
   }
 
   public onWishedClick(wishlist: AppState['wishlist'], id: IProduct['_id']): void {
