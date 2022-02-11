@@ -2,8 +2,7 @@ import { Component } from '@angular/core'
 import { MediaObserver } from '@angular/flex-layout'
 import { Store } from '@ngrx/store'
 import { AppState } from 'src/app/store/app.state'
-import { selectCartQuantity } from 'src/app/store/cart/cart.selectors'
-import { selectWishlistQuantity } from 'src/app/store/wishlist/wishlist.selectors'
+import { selectGuest } from 'src/app/store/guest/guest.selectors'
 
 @Component({
   selector: 'app-header',
@@ -11,8 +10,7 @@ import { selectWishlistQuantity } from 'src/app/store/wishlist/wishlist.selector
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  public readonly wishlistQty$ = this.store.select(selectWishlistQuantity)
-  public readonly cartQty$ = this.store.select(selectCartQuantity)
+  public readonly guest$ = this.store.select(selectGuest)
   public navbarClosed = true
 
   constructor(

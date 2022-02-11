@@ -67,32 +67,30 @@
         </ul>
       </nav>
       <nav class="extra-links-wrapper">
-        <ul class="extra-links">
-          <li>
-            <ng-container *ngrxLet="cartQty$ as cartQty">
+        <ng-container *ngrxLet="guest$ as guest">
+          <ul class="extra-links">
+            <li>
               <a routerLink="/cart" class="cart-link">
                 <img
                 src="/assets/svg/shopping-cart.svg"
                 class="cart-icon"
                 alt="cart"
                 >
-                <span class="count" *ngIf="cartQty">{{ cartQty }}</span>
+                <span class="count" *ngIf="guest.data?.cart as cartQty">{{ cartQty }}</span>
               </a>
-            </ng-container>
-          </li>
-          <li>
-            <ng-container *ngrxLet="wishlistQty$ as wishlistQty">
+            </li>
+            <li>
               <a routerLink="/wishlist" class="wishlist-link">
                 <img
                 src="/assets/svg/heart.svg"
                 class="favourites-icon"
                 alt="favourites"
                 >
-                <span class="count" *ngIf="wishlistQty">{{ wishlistQty }}</span>
+                <span class="count" *ngIf="guest.data?.wishlist as wishlistQty">{{ wishlistQty }}</span>
               </a>
-            </ng-container>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </ng-container>
       </nav>
     </div>
     <div class="navbar-wrapper" *ngIf="!navbarClosed">
