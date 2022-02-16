@@ -1,0 +1,10 @@
+@use "src/assets/scss/colors";
+@use "src/assets/scss/typography";
+
+.text-field {
+  height: 60px;
+  width: 100%;
+  border: 1px solid colors.$color-tertiary;
+  color: rgba($color: black, $alpha: 0.5);
+  padding: 1rem 0.75rem;
+}
