@@ -20,6 +20,9 @@ export class ButtonComponent {
 
   @Input()
   public isLoading = false
+
+  @Input()
+  public disabled = false
  
   @Output()
   public readonly clicked = new EventEmitter()

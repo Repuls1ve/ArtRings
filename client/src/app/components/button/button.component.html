@@ -3,7 +3,7 @@
 [class.button-secondary]="theme == 'secondary'"
 [class.button-primary]="theme == 'primary'"
 [class.loading]="isLoading"
-[disabled]="isLoading"
+[disabled]="isLoading || disabled"
 (click)="handleClick()"
 >
   {{ isLoading ? '' : text }}
