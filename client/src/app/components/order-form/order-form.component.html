@@ -1,0 +1,45 @@
+<form class="order-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>
+    Ваше имя
+    <app-text-field [formControlName]="controls.Name"></app-text-field>
+    <span
+    class="error"
+    *ngIf="name.errors?.['required'] && form.dirty"
+    >Имя является обязательным полем</span>
+  </label>
+  <div class="row">
+    <label class="email">
+      Ваш e-mail
+      <app-text-field [formControlName]="controls.Email"></app-text-field>
+      <span
+      class="error"
+      *ngIf="email.errors?.['required'] && form.dirty"
+      >E-mail является обязательным полем</span>
+      <span
+      class="error"
+      *ngIf="email.errors?.['email'] && form.dirty"
+      >Укажите правильный адрес электронной почты</span>
+    </label>
+    <label class="phone">
+      Ваш телефон
+      <app-text-field [formControlName]="controls.Phone"></app-text-field>
+      <span
+      class="error"
+      *ngIf="phone.errors?.['required'] && form.dirty"
+      >Телефон является обязательным полем</span>
+    </label>
+  </div>
+  <label>
+    Комментарий
+    <app-text-area [formControlName]="controls.Comment"></app-text-area>
+    <span
+    class="error"
+    *ngIf="comment.errors?.['required'] && form.dirty"
+    >Комментарий является обязательным полем</span>
+    <span
+    class="error"
+    *ngIf="comment.errors?.['minlength'] && form.dirty"
+    >Комментарий не может быть менее {{ comment.errors!['minlength']['requiredLength'] }} символов</span>
+  </label>
+  <app-button [disabled]="!form.valid" type="submit" text="Оставить заявку"></app-button>
+</form>
