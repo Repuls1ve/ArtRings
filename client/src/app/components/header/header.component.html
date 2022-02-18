@@ -4,18 +4,7 @@
     <div class="top-nav" *ngIf="media.isActive('gt-md')">
       <nav class="nav-links-wrapper">
         <ul class="nav-links">
-          <li>
-            <a routerLink="/studio">Студия</a>
-          </li>
-          <li>
-            <a routerLink="/about">О нас</a>
-          </li>
-          <li>
-            <a routerLink="/shipping">Доставка и оплата</a>
-          </li>
-          <li>
-            <a routerLink="/guarantees">Гарантии</a>
-          </li>
+          <ng-container *ngTemplateOutlet="links"></ng-container>
         </ul>
       </nav>
       <div class="search">
@@ -34,15 +23,14 @@
       <ng-container *ngTemplateOutlet="brand"></ng-container>
     </ng-container>
     <div class="main-nav">
-      <a routerLink="/">
+      <a routerLink="/" *ngIf="media.isActive('gt-md')">
         <img
-        *ngIf="media.isActive('gt-md')"
         class="logo"
         src="/assets/img/logo-alt.png"
         alt="logo"
         >
       </a>
-      <button class="navbar-toggler" aria-label="menu-toggler" (click)="toggleNavbar()">
+      <button class="navbar-toggler" aria-label="menu-toggler" (click)="openNavbar()">
         <img
         class="menu-icon"
         src="/assets/svg/burger.svg"
@@ -94,7 +82,7 @@
     </div>
     <div class="navbar-wrapper" *ngIf="!navbarClosed">
       <div class="navbar-menu">
-        <button class="close-button" aria-label="menu-close" (click)="toggleNavbar()">
+        <button class="close-button" aria-label="menu-close" (click)="closeNavbar()">
           <img
           class="close-icon"
           src="/assets/svg/close.svg"
@@ -110,21 +98,7 @@
         </a>
         <nav class="main-links-wrapper">
           <ul class="main-links">
-            <li>
-              <a routerLink="/studio">Студия</a>
-            </li>
-            <li>
-              <a routerLink="/about">О нас</a>
-            </li>
-            <li>
-              <a routerLink="/shipping">Доставка и оплата</a>
-            </li>
-            <li>
-              <a routerLink="/guarantees">Гарантии</a>
-            </li>
-            <li>
-              <a routerLink="/contacts">Контакты</a>
-            </li>
+            <ng-container *ngTemplateOutlet="links"></ng-container>
           </ul>
         </nav>
         <hr class="hr">
@@ -141,21 +115,7 @@
             </li>
           </ul>
           <ul class="footer-links">
-            <li>
-              <a routerLink="/studio">Студия</a>
-            </li>
-            <li>
-              <a routerLink="/about">О нас</a>
-            </li>
-            <li>
-              <a routerLink="/contacts">Контакты</a>
-            </li>
-            <li>
-              <a routerLink="/shipping">Доставка и оплата</a>
-            </li>
-            <li>
-              <a routerLink="/guarantees">Гарантии</a>
-            </li>
+            <ng-container *ngTemplateOutlet="links"></ng-container>
           </ul>
           <ul class="footer-links">
             <li>
@@ -164,8 +124,8 @@
             <li>
               <a routerLink="/wearing">О помолвочных кольцах</a>
             </li>
-            <li class="social-media-wrapper">
-              <app-social-media></app-social-media>
+            <li>
+              <app-social-media class="social-media"></app-social-media>
             </li>
           </ul>
         </nav>
@@ -176,6 +136,23 @@
         <h1 class="name">Art-Rings</h1>
         <h2 class="destination">Moscow jewelry studio</h2>
       </div>
+    </ng-template>
+    <ng-template #links>
+      <li>
+        <a routerLink="/studio">Студия</a>
+      </li>
+      <li>
+        <a routerLink="/about">О нас</a>
+      </li>
+      <li>
+        <a routerLink="/shipping">Доставка и оплата</a>
+      </li>
+      <li>
+        <a routerLink="/guarantees">Гарантии</a>
+      </li>
+      <li>
+        <a routerLink="/contacts">Контакты</a>
+      </li>
     </ng-template>
   </div>
 </header>

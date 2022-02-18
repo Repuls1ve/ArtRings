@@ -95,4 +95,9 @@
     display: flex;
     justify-content: center;
   }
+
+  .no-products {
+    font-family: typography.$font-secondary;
+    font-weight: typography.$medium;
+  }
 }
