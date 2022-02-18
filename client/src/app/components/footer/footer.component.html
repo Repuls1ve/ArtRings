@@ -1,6 +1,6 @@
 <footer class="footer">
   <div class="column" *ngIf="media.isActive('gt-md')">
-    <a>
+    <a routerLink="/">
       <img
       src="/assets/img/logo.png"
       class="logo"
@@ -25,9 +25,6 @@
       <li>
         <a routerLink="/guarantees">Гарантии</a>
       </li>
-      <li>
-        <a>Отзывы</a>
-      </li>
     </ul>
   </div>
   <div class="column">
@@ -35,9 +32,6 @@
     <ul class="nav">
       <li>
         <a routerLink="/gift">Бриллиант в подарок</a>
-      </li>
-      <li>
-        <a>Как выбрать обручальные кольца</a>
       </li>
       <li>
         <a routerLink="/wearing">О помолвочных кольцах</a>
@@ -48,22 +42,13 @@
     <h3 class="title">Ассортимент</h3>
     <ul class="nav">
       <li>
-        <a>Все обручальные кольца</a>
+        <a routerLink="/catalog/weddings-rings" [queryParams]="{ page: 1 }">Все обручальные кольца</a>
       </li>
       <li>
-        <a>Необычные обручальные кольца</a>
+        <a routerLink="/catalog/engagement-rings" [queryParams]="{ page: 1 }">Помолвочные кольца</a>
       </li>
       <li>
-        <a>Классические обручальные кольца</a>
-      </li>
-      <li>
-        <a>Помолвочные кольца</a>
-      </li>
-      <li>
-        <a>Кольца с лебедями</a>
-      </li>
-      <li>
-        <a>Обручальные кольца парные</a>
+        <a routerLink="/catalog/wedding-duets" [queryParams]="{ page: 1 }">Свадебные дуэты</a>
       </li>
     </ul>
   </div>

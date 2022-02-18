@@ -16,9 +16,6 @@
           <li>
             <a routerLink="/guarantees">Гарантии</a>
           </li>
-          <li>
-            <a>Отзывы</a>
-          </li>
         </ul>
       </nav>
       <div class="search">
@@ -37,12 +34,14 @@
       <ng-container *ngTemplateOutlet="brand"></ng-container>
     </ng-container>
     <div class="main-nav">
-      <img
-      *ngIf="media.isActive('gt-md')"
-      class="logo"
-      src="/assets/img/logo-alt.png"
-      alt="logo"
-      >
+      <a routerLink="/">
+        <img
+        *ngIf="media.isActive('gt-md')"
+        class="logo"
+        src="/assets/img/logo-alt.png"
+        alt="logo"
+        >
+      </a>
       <button class="navbar-toggler" aria-label="menu-toggler" (click)="toggleNavbar()">
         <img
         class="menu-icon"
@@ -102,11 +101,13 @@
           alt="close"
           >
         </button>
-        <img
-        class="logo"
-        src="/assets/img/logo-alt-large.png"
-        alt="logo"
-        >
+        <a routerLink="/">
+          <img
+          class="logo"
+          src="/assets/img/logo-alt-large.png"
+          alt="logo"
+          >
+        </a>
         <nav class="main-links-wrapper">
           <ul class="main-links">
             <li>
@@ -130,22 +131,13 @@
         <nav class="navbar-footer">
           <ul class="footer-links">
             <li>
-              <a>Все обручальные кольца</a>
+              <a routerLink="/catalog/weddings-rings" [queryParams]="{ page: 1 }">Все обручальные кольца</a>
             </li>
             <li>
-              <a>Необычные обручальные кольца</a>
+              <a routerLink="/catalog/engagement-rings" [queryParams]="{ page: 1 }">Помолвочные кольца</a>
             </li>
             <li>
-              <a>Классические обручальные кольца</a>
-            </li>
-            <li>
-              <a>Помолвочные кольца</a>
-            </li>
-            <li>
-              <a>Кольца с лебедями</a>
-            </li>
-            <li>
-              <a>Обручальные кольца парные</a>
+              <a routerLink="/catalog/wedding-duets" [queryParams]="{ page: 1 }">Свадебные дуэты</a>
             </li>
           </ul>
           <ul class="footer-links">
@@ -164,16 +156,10 @@
             <li>
               <a routerLink="/guarantees">Гарантии</a>
             </li>
-            <li>
-              <a>Отзывы</a>
-            </li>
           </ul>
           <ul class="footer-links">
             <li>
               <a routerLink="/gift">Бриллиант в подарок</a>
-            </li>
-            <li>
-              <a>Как выбрать обручальные кольца</a>
             </li>
             <li>
               <a routerLink="/wearing">О помолвочных кольцах</a>
