@@ -29,18 +29,18 @@ export class OrderFormComponent {
   }
   
   public get name(): AbstractControl {
-    return this.form.get(OrderFormControls.Name)!
+    return this.form.get(this.controls.Name)!
   }
 
   public get email(): AbstractControl {
-    return this.form.get(OrderFormControls.Email)!
+    return this.form.get(this.controls.Email)!
   }
 
   public get phone(): AbstractControl {
-    return this.form.get(OrderFormControls.Phone)!
+    return this.form.get(this.controls.Phone)!
   }
 
   public get comment(): AbstractControl {
-    return this.form.get(OrderFormControls.Comment)!
+    return this.form.get(this.controls.Comment)!
   }
 }

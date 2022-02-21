@@ -1,0 +1,30 @@
+@use "src/assets/scss/colors";
+@use "src/assets/scss/typography";
+@use "src/assets/scss/breakpoints";
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .error {
+    color: crimson;
+    font-size: 0.875rem;
+  }
+
+  .row {
+    display: flex;
+    gap: 1.5rem;
+
+    .rating,
+    .submit {
+      flex-basis: 50%;
+    }
+  }
+
+  label {
+    font-size: 0.75rem;
+    color: colors.$color-tertiary;
+    line-height: 150%;
+  }
+}

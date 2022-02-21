@@ -1,0 +1,35 @@
+<form class="review-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>
+    Ваше имя
+    <app-text-field [formControlName]="controls.Name"></app-text-field>
+    <span
+    class="error"
+    *ngIf="name.errors?.['required'] && form.dirty"
+    >Имя является обязательным полем</span>
+  </label>
+  <label>
+    Ваш отзыв
+    <app-text-area [formControlName]="controls.Comment" [height]="200"></app-text-area>
+    <span
+    class="error"
+    *ngIf="comment.errors?.['required'] && form.dirty"
+    >Отзыв является обязательным полем</span>
+    <span
+    class="error"
+    *ngIf="comment.errors?.['minlength'] && form.dirty"
+    >Отзыв не может быть менее {{ comment.errors!['minlength']['requiredLength'] }} символов</span>
+  </label>
+  <div class="row">
+    <label class="rating">
+      Ваша оценка
+      <app-rating-input [formControlName]="controls.Rating" [height]="30"></app-rating-input>
+    </label>
+    <app-button
+    class="rating"
+    [disabled]="!form.valid"
+    type="submit"
+    theme="secondary"
+    text="Оставить отзыв"
+    ></app-button>
+  </div>
+</form>
