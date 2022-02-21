@@ -1,0 +1,8 @@
+<div class="rating-input">
+  <img
+  *ngFor="let starred of stars; let i = index"
+  [src]="starSource(starred)"
+  [style.height.px]="height"
+  (click)="onTouched(); rate(i + (starred ? (value > i + 1 ? 1 : 0) : 1))"
+  >
+</div>

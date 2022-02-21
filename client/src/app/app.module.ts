@@ -39,11 +39,13 @@ import { GiftDecorationComponent } from './components/gift-decoration/gift-decor
 import { PrivacyComponent } from './views/privacy/privacy.component'
 import { CatalogComponent } from './views/catalog/catalog.component'
 import { ProductComponent } from './views/product/product.component'
-import { ReviewComponent } from './components/review/review.component';
+import { ReviewComponent } from './components/review/review.component'
 import { TextFieldComponent } from './components/text-field/text-field.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrderFormComponent } from './components/order-form/order-form.component';
-import { TextAreaComponent } from './components/text-area/text-area.component'
+import { TextAreaComponent } from './components/text-area/text-area.component';
+import { ReviewFormComponent } from './components/review-form/review-form.component';
+import { RatingInputComponent } from './components/rating-input/rating-input.component'
 
 @NgModule({
   declarations: [
@@ -80,7 +82,9 @@ import { TextAreaComponent } from './components/text-area/text-area.component'
     ReviewComponent,
     TextFieldComponent,
     OrderFormComponent,
-    TextAreaComponent
+    TextAreaComponent,
+    ReviewFormComponent,
+    RatingInputComponent
   ],
   imports: [
     BrowserModule,
