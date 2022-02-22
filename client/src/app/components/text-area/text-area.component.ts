@@ -31,11 +31,12 @@ export class TextAreaComponent implements ControlValueAccessor {
 
   public onInput(event: Event): void {
     const element = event.target as HTMLInputElement
-    this.onChange(element.value)
+    this.writeValue(element.value)
   }
 
   public writeValue(value: string): void {
     this.value = value
+    this.onChange(value)
   }
 
   public setDisabledState(disabled: boolean): void {
