@@ -1,4 +1,4 @@
-<form class="review-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+<form class="review-form" [formGroup]="form" (ngSubmit)="submit()">
   <label>
     Ваше имя
     <app-text-field [formControlName]="controls.Name"></app-text-field>
@@ -27,6 +27,7 @@
     <app-button
     class="rating"
     [disabled]="!form.valid"
+    [isLoading]="isLoading"
     type="submit"
     theme="secondary"
     text="Оставить отзыв"

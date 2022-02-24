@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 export enum ReviewFormControls {
@@ -13,8 +13,11 @@ export enum ReviewFormControls {
   styleUrls: ['./review-form.component.scss']
 })
 export class ReviewFormComponent {
+  @Input()
+  public isLoading = false
+
   @Output()
-  public readonly submit = new EventEmitter<FormGroup>()
+  public readonly onSubmit = new EventEmitter<FormGroup>()
 
   public readonly controls = ReviewFormControls
   public readonly form = this.formBuilder.group({
@@ -25,8 +28,8 @@ export class ReviewFormComponent {
 
   constructor(private readonly formBuilder: FormBuilder) {}
 
-  public onSubmit(): void {
-    this.submit.emit(this.form)
+  public submit(): void {
+    this.onSubmit.emit(this.form)
   }
 
   public get name(): AbstractControl {

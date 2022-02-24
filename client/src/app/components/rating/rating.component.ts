@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core'
 
 type star = 'semi' | 'filled' | 'outlined'
 
@@ -7,13 +7,13 @@ type star = 'semi' | 'filled' | 'outlined'
   templateUrl: './rating.component.html',
   styleUrls: ['./rating.component.scss']
 })
-export class RatingComponent implements OnInit {
+export class RatingComponent implements OnChanges {
   @Input()
   public rating!: number
 
   public stars: star[] = []
 
-  ngOnInit(): void {
+  public ngOnChanges(): void {
     this.fillStars()
   }
 

@@ -79,7 +79,7 @@
           </ul>
         </div>
       </div>
-      <div class="details">
+      <div class="details" *ngrxLet="reviews$ as reviews">
         <ng-container *ngIf="media.isActive('gt-xs')">
           <div class="branches">
             <div class="branch">
@@ -102,12 +102,19 @@
             <div class="descriptions" *ngIf="branch == 'description'">
               <ng-container *ngTemplateOutlet="descriptions"></ng-container>
             </div>
-            <div class="reviews-carousel" *ngIf="branch == 'reviews'">
-              <app-carousel [scrollbar]="false">
+            <div class="reviews" *ngIf="branch == 'reviews'">
+              <app-carousel [scrollbar]="false" *ngIf="product.data.reviews.length; else noReviews">
                 <app-carousel-item *ngFor="let review of product.data.reviews">
                   <app-review [review]="review"></app-review>
                 </app-carousel-item>
               </app-carousel>
+              <app-review-form
+              (onSubmit)="sendReview($event)"
+              [isLoading]="reviews.status == 'loading'"
+              ></app-review-form>
+              <ng-template #noReviews>
+                <h3 class="no-reviews">Оставьте отзыв первыми</h3>
+              </ng-template>
             </div>
           </div>
         </ng-container>
@@ -123,6 +130,10 @@
             [review]="review"
             *ngFor="let review of product.data.reviews"
             ></app-review>
+            <app-review-form>
+            (onSubmit)="sendReview($event)"
+            [isLoading]="reviews.status == 'loading'"
+            </app-review-form>
           </div>
         </ng-container>
         <ng-template #descriptions>
