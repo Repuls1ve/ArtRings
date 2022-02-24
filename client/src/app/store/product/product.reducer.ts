@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store'
-import { IPagination } from 'src/app/interfaces/pagination.interface'
 import { IProduct } from 'src/app/models/product.model'
 import { error, status } from '../app.reducers'
 import { loadProduct, loadProductFailure, loadProductSuccess } from './product.actions'

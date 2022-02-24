@@ -2,6 +2,7 @@ import { cartReducer } from './cart/cart.reducer'
 import { catalogReducer } from './catalog/catalog.reducer'
 import { guestReducer } from './guest/guest.reducer'
 import { productReducer } from './product/product.reducer'
+import { reviewsReducer } from './reviews/reviews.reducer'
 import { viewedReducer } from './viewed/viewed.reducer'
 import { wishlistReducer } from './wishlist/wishlist.reducer'
 
@@ -14,7 +15,8 @@ export enum Features {
   Wishlist = 'wishlist',
   Viewed = 'viewed',
   Catalog = 'catalog',
-  Product = 'product'
+  Product = 'product',
+  Reviews = 'reviews'
 }
 
 export const AppReducers = {
@@ -23,5 +25,6 @@ export const AppReducers = {
   [Features.Wishlist]: wishlistReducer,
   [Features.Viewed]: viewedReducer,
   [Features.Catalog]: catalogReducer,
-  [Features.Product]: productReducer
+  [Features.Product]: productReducer,
+  [Features.Reviews]: reviewsReducer
 }
