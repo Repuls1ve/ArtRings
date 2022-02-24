@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { Model } from 'mongoose'
+import { Model, QueryOptions, UpdateQuery } from 'mongoose'
 import { from, map, Observable, of, switchMap, throwError } from 'rxjs'
 import { FiltersDto } from 'src/products/dtos/filters.dto'
 import { PaginationQueryDto } from 'src/common/dtos/pagination-query.dto'
@@ -8,6 +8,7 @@ import { IPagination } from 'src/common/interfaces/pagination.interface'
 import { AddProductDto } from './dtos/add-product.dto'
 import { Product, ProductDocument } from './schemas/product.schema'
 import { toArray } from 'src/common/utils/data.util'
+import { AddReviewDto } from './dtos/add-review.dto'
 
 @Injectable()
 export class ProductsService {
@@ -57,5 +58,22 @@ export class ProductsService {
 
   public addProduct(addProductDto: AddProductDto): Observable<ProductDocument> {
     return from(this.product.create(addProductDto.product))
+  }
+
+  public addReview(
+    review: AddReviewDto['review'],
+    id: AddReviewDto['id']
+  ): Observable<ProductDocument> {
+    const options: QueryOptions = { new: true }
+
+    return from(this.getProduct(id)).pipe(
+      switchMap(product => {
+        product.reviews = [...product.reviews, review]
+        const ratings = product.reviews.map(review => review.rating)
+        const updatedRating = ratings.reduce((a, b) => a + b, 0) / ratings.length
+        product.rating = updatedRating
+        return from(product.save(options))
+      })
+    )
   }
 }
