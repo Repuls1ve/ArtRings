@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Types, Model, QueryOptions, UpdateQuery, Document, FilterQuery } from 'mongoose'
-import { from, map, Observable, of, switchMap } from 'rxjs'
+import { combineLatest, from, map, Observable, of, switchMap } from 'rxjs'
 import { ProductsService } from 'src/products/products.service'
 import { ProductDocument } from 'src/products/schemas/product.schema'
 import { UpdateGuestDto } from './dtos/update-guest.dto'
@@ -49,11 +49,25 @@ export class GuestsService {
   }
 
   public getGuestViewed(id: GuestDocument['id']): Observable<Pick<IGuest, 'viewed' | 'metrics'>> {
+    const options: QueryOptions = { new: true }
+
     return from(this.guest.findById(id)).pipe(
-      map(guest => ({
-        viewed: guest.viewed,
-        metrics: this.getMetrics(guest)
-      }))
+      switchMap(guest => {
+        const viewedList$ = guest.viewed.items.map(item => 
+          this.products.getProduct(item['_id'])  
+        )
+        return combineLatest(viewedList$).pipe(
+          switchMap(viewedList => {
+            guest.viewed.items = viewedList
+            return from(guest.save(options)).pipe(
+              map(guest => ({
+                viewed: guest.viewed,
+                metrics: this.getMetrics(guest)
+              }))
+            )
+          })
+        )
+      })
     )
   }
 
@@ -249,12 +263,13 @@ export class GuestsService {
             ...(!isAlreadyViewed && { $push: { 'viewed.items': product} })
           }
 
-          return from(this.guest.findByIdAndUpdate(id, updateQuery, queryOptions)).pipe(
-            map(guest => ({
-              viewed: guest.viewed,
-              metrics: this.getMetrics(guest)
-            }))
-          )
+          return combineLatest([
+            from(this.guest.findByIdAndUpdate(id, updateQuery)),
+            this.getGuestViewed(id)
+          ]).pipe(map(([_, updated]) => ({
+            viewed: updated.viewed,
+            metrics: updated.metrics
+          })))
         })
       ))
     )
