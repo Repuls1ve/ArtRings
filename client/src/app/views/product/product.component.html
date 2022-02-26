@@ -143,7 +143,7 @@
     </div>
     <ng-template #wishlistButton>
       <ng-container *ngrxLet="wishlist$ as wishlist">
-        <ng-container *ngIf="wishlist.status == 'success'">
+        <ng-container *ngIf="wishlist.status == 'success'; else wishlistLoader">
           <button class="wishlist" *ngIf="product.data._id as id" (click)="onWishedClick(wishlist, id)">
             <img
             src="/assets/svg/heart.svg"
@@ -154,6 +154,9 @@
             {{ isWished(wishlist, id) ? 'в избранном' : 'в избранное'}}
           </button>
         </ng-container>
+        <ng-template #wishlistLoader>
+          <ngx-skeleton-loader class="wishlist-loader"></ngx-skeleton-loader>
+        </ng-template>
       </ng-container>
     </ng-template>
     <ng-template #ratingScale>

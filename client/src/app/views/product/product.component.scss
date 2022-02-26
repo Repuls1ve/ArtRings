@@ -8,6 +8,7 @@
 
   .heading-group {
     display: flex;
+    align-items: center;
     gap: 1.85rem;
 
     .rating {
@@ -28,6 +29,11 @@
     @include breakpoints.new(400px) {
       flex-direction: column;
       gap: 0.5rem;
+    }
+
+    .wishlist-loader {
+      width: 100px;
+      margin-bottom: -15px;
     }
   }
 
